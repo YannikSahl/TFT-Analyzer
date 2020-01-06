@@ -48,6 +48,4 @@ void Visualiser::fillOverview(){
     QString leaguePoints = QString::number(rankedData["leaguePoints"].toInt()) + " LP";
     analyticsWindow->setLabel_LP(leaguePoints);
 
-    qInfo() << "testCommit";
-
 }
