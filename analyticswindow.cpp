@@ -23,6 +23,7 @@ AnalyticsWindow::~AnalyticsWindow()
 ///// SLOTS
 void AnalyticsWindow::setLabel_ProfileIcon(QPixmap profileIcon){
     ui->label_profileIcon->setPixmap(profileIcon);
+    ui->label_profileIcon->setScaledContents(true);
 }
 
 void AnalyticsWindow::setLabel_Name(QString name){

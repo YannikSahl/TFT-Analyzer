@@ -33,9 +33,9 @@ void Visualiser::fillOverview(){
 
     // Profile icon
     int profileIconId = summonerData["profileIconId"].toInt();
-    QString iconPath = "include/profileicon/" + QString::number(profileIconId);
-    QPixmap profileIcon;
-    profileIcon.load(iconPath);
+    //QString iconPath = "/include/tftStuff/profileicon/" + QString::number(profileIconId);
+    QString iconPath = "C:\\Users\\Yannik\\SynologyDrive\\HTW\\Module\\3 (5) WP1 - Vertiefung in die Programmierung\\Projekt\\QT Laptop\\TFTApp\\include\\tftStuff\\profileicon\\718.png";
+    QPixmap profileIcon(iconPath);
     analyticsWindow->setLabel_ProfileIcon(profileIcon);
 
     // Name
@@ -60,12 +60,13 @@ void Visualiser::fillOverview(){
     int wins = rankedData["wins"].toInt();
     int losses = rankedData["losses"].toInt();
     int gamesPlayed = wins + losses;
-    double winrate = wins / gamesPlayed;
+    double winrate = round(1000*(double)wins / gamesPlayed)/10;
+    QString winrateString = QString::number(winrate) + "%";
 
     analyticsWindow->setLabel_Games(QString::number(gamesPlayed));
     analyticsWindow->setLabel_Wins(QString::number(wins));
     analyticsWindow->setLabel_Losses(QString::number(losses));
-    analyticsWindow->setLabel_Winrate(QString::number(winrate));
+    analyticsWindow->setLabel_Winrate(winrateString);
 
     // Favorite comp
 

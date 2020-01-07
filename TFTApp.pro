@@ -23,7 +23,6 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     requesthandler.cpp \
-    tests.cpp \
     visualiser.cpp
 
 HEADERS += \
@@ -31,7 +30,6 @@ HEADERS += \
     datainquirer.h \
     mainwindow.h \
     requesthandler.h \
-    tests.h \
     visualiser.h
 
 FORMS += \
@@ -42,3 +40,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    TFTIcons.qrc
