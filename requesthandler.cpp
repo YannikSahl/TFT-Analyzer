@@ -22,10 +22,13 @@ RequestHandler::RequestHandler(AnalyticsWindow *analyticsWindow_, QString apiKey
 
 
 // Orchestrate Process Procedure
-void RequestHandler::handleRequest(){
+bool RequestHandler::handleRequest(){
 
     // Get Summoner Info
     QJsonObject summonerData = querySummonerInfo(this->summonerName);
+    if(summonerData.isEmpty()){
+        return false;
+    }
 
     // Get Ranked Info
     QString summonerId = summonerData["id"].toString();
@@ -60,6 +63,7 @@ void RequestHandler::handleRequest(){
     // Forward Data for Visualisation
     Visualiser *visual = new Visualiser(analyticsWindow, summonerData, rankedData, matchIDsData, matchData);
     visual->fillGUI();
+    return true;
 
 }
 

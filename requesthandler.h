@@ -30,7 +30,7 @@ private:
 public:
 
     RequestHandler(AnalyticsWindow *analyticsWindow, QString apiKey_, QString summonerName_, QString region_);
-    void handleRequest();
+    bool handleRequest();
 
     QString determineRegion(bool regionFormat);
 

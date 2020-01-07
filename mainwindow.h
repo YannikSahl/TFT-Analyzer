@@ -16,6 +16,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void showError();
+
 private slots:
     void on_searchButton_released();
 
