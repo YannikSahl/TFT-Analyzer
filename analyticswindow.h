@@ -18,6 +18,7 @@ public:
 
 public slots:
     void setLabel_ProfileIcon(QPixmap profileIcon);
+    void setLabel_RankedIcon(QPixmap profileIcon);
 
     void setLabel_Name(QString name);
     void setLabel_Region(QString region);

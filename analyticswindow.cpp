@@ -11,6 +11,7 @@ AnalyticsWindow::AnalyticsWindow(QWidget *parent) :
     ui->setupUi(this);
     // Hide "?"
     this->setWindowFlag(Qt::WindowContextHelpButtonHint,false);
+    this->setWindowIcon(QPixmap(":/icons/include/tftStuff/tft_icon.png"));
 }
 
 // Destructor
@@ -22,8 +23,13 @@ AnalyticsWindow::~AnalyticsWindow()
 
 ///// SLOTS
 void AnalyticsWindow::setLabel_ProfileIcon(QPixmap profileIcon){
-    ui->label_profileIcon->setPixmap(profileIcon);
-    ui->label_profileIcon->setScaledContents(true);
+    ui->label_picture_profileIcon->setPixmap(profileIcon);
+    ui->label_picture_profileIcon->setScaledContents(true);
+}
+
+void AnalyticsWindow::setLabel_RankedIcon(QPixmap profileIcon){
+    ui->label_picture_ranked->setPixmap(profileIcon);
+    ui->label_picture_ranked->setScaledContents(true);
 }
 
 void AnalyticsWindow::setLabel_Name(QString name){

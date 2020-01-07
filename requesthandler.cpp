@@ -39,6 +39,9 @@ bool RequestHandler::handleRequest(){
     QJsonObject matchIDsData = queryMatchIDs(puuid);
 
     // Get Match Info
+    if(matchIDsData["matches"].isNull()){
+        return false;
+    }
     QJsonArray matchIds = matchIDsData["matches"].toArray();
     int maxMatches = 1;
 

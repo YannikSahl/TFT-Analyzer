@@ -8,6 +8,7 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setWindowIcon(QPixmap(":/icons/include/tftStuff/tft_icon.png"));
 }
 
 // Destructor
@@ -21,7 +22,7 @@ void MainWindow::on_searchButton_released()
 {
 
     // Read User Input
-    QString apiKey = "RGAPI-eaa7cde0-4769-4b70-9141-400f9cb4802a";
+    QString apiKey = "RGAPI-67b6bdfc-3bee-43a9-8731-c10c930d16d6";
     QString summonerName = ui->summonerNameLine->text();
     QString region = ui->regionChooserBox->currentText();
 
