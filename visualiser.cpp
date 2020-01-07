@@ -3,6 +3,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QDebug>
+#include <QPixmap>
 
 
 Visualiser::Visualiser(AnalyticsWindow *analyticsWindow_, QJsonObject summonerData_, QJsonObject rankedData_, QJsonObject matchIDsData_, QVector<QJsonObject> matchData_)
@@ -30,6 +31,13 @@ void Visualiser::fillGUI(){
 // Fills Overview Tab
 void Visualiser::fillOverview(){
 
+    // Profile icon
+    int profileIconId = summonerData["profileIconId"].toInt();
+    QString iconPath = "include/profileicon/" + QString::number(profileIconId);
+    QPixmap profileIcon;
+    profileIcon.load(iconPath);
+    analyticsWindow->setLabel_ProfileIcon(profileIcon);
+
     // Name
     QString summonerName = summonerData["name"].toString();
     analyticsWindow->setLabel_Name(summonerName);
@@ -47,5 +55,18 @@ void Visualiser::fillOverview(){
     // League Points
     QString leaguePoints = QString::number(rankedData["leaguePoints"].toInt()) + " LP";
     analyticsWindow->setLabel_LP(leaguePoints);
+
+    // Games, Wins, Losses, Winrate
+    int wins = rankedData["wins"].toInt();
+    int losses = rankedData["losses"].toInt();
+    int gamesPlayed = wins + losses;
+    double winrate = wins / gamesPlayed;
+
+    analyticsWindow->setLabel_Games(QString::number(gamesPlayed));
+    analyticsWindow->setLabel_Wins(QString::number(wins));
+    analyticsWindow->setLabel_Losses(QString::number(losses));
+    analyticsWindow->setLabel_Winrate(QString::number(winrate));
+
+    // Favorite comp
 
 }
