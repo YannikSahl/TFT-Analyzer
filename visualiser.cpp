@@ -33,8 +33,8 @@ void Visualiser::fillOverview(){
 
     // Profile icon
     int profileIconId = summonerData["profileIconId"].toInt();
-    //QString iconPath = "/include/tftStuff/profileicon/" + QString::number(profileIconId);
-    QString iconPath = "C:\\Users\\Yannik\\SynologyDrive\\HTW\\Module\\3 (5) WP1 - Vertiefung in die Programmierung\\Projekt\\QT Laptop\\TFTApp\\include\\tftStuff\\profileicon\\718.png";
+    QString iconPath = "\\include\\tftStuff\\profileicon\\" + QString::number(profileIconId) + ".png";
+    //QString iconPath = "C:\\Users\\Yannik\\SynologyDrive\\HTW\\Module\\3 (5) WP1 - Vertiefung in die Programmierung\\Projekt\\QT Laptop\\TFTApp\\include\\tftStuff\\profileicon\\718.png";
     QPixmap profileIcon(iconPath);
     analyticsWindow->setLabel_ProfileIcon(profileIcon);
 
