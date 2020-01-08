@@ -86,7 +86,7 @@ QTabBar::tab:selected {
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -119,6 +119,9 @@ QTabBar::tab:selected {
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
         <widget class="QFrame" name="frame_2">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255)</string>
+         </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
@@ -128,15 +131,38 @@ QTabBar::tab:selected {
          <layout class="QGridLayout" name="gridLayout_5">
           <item row="1" column="1">
            <widget class="QLabel" name="label_data_region">
+            <property name="font">
+             <font>
+              <family>Sans Serif</family>
+              <pointsize>-1</pointsize>
+              <weight>50</weight>
+              <italic>true</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-style: italic;
+font-size: 30px;</string>
+            </property>
             <property name="text">
-             <string/>
+             <string>placeholder</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignHCenter|Qt::AlignTop</set>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
            <widget class="QLabel" name="label_data_summonerName">
+            <property name="styleSheet">
+             <string notr="true">font-size: 80px;
+text-decoration: underline;</string>
+            </property>
             <property name="text">
-             <string/>
+             <string>placeholder</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -162,7 +188,8 @@ QTabBar::tab:selected {
             </property>
             <property name="styleSheet">
              <string notr="true">border: 2px solid;
-border-color: rgb(255, 170, 0);</string>
+border-color: rgb(255, 170, 0);
+background-color: rgb(0, 0, 0);</string>
             </property>
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -172,7 +199,7 @@ border-color: rgb(255, 170, 0);</string>
          </layout>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item row="2" column="0">
         <widget class="QFrame" name="frame">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -184,14 +211,20 @@ border-color: rgb(255, 170, 0);</string>
           <item row="0" column="1">
            <widget class="QLabel" name="label_data_tier">
             <property name="text">
-             <string/>
+             <string>placeholder</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
            <widget class="QLabel" name="label_data_leaguePoints">
             <property name="text">
-             <string/>
+             <string>placeholder</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignHCenter|Qt::AlignTop</set>
             </property>
            </widget>
           </item>
@@ -211,7 +244,8 @@ border-color: rgb(255, 170, 0);</string>
             </property>
             <property name="styleSheet">
              <string notr="true">border: 2px solid;
-border-color: rgb(255, 170, 0);</string>
+border-color: rgb(255, 170, 0);
+background-color: rgb(0, 0, 0);</string>
             </property>
             <property name="text">
              <string/>
@@ -219,6 +253,32 @@ border-color: rgb(255, 170, 0);</string>
            </widget>
           </item>
          </layout>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QFrame" name="frame_3">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>2</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>2</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: 2px solid;
+border-color: rgb(255, 170, 0);</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
         </widget>
        </item>
       </layout>

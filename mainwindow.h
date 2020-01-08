@@ -20,7 +20,6 @@ public:
 
 private slots:
     void on_searchButton_released();
-
     void on_summonerNameLine_returnPressed();
 
 private:

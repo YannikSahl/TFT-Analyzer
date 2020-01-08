@@ -18,7 +18,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// Start Search on Enter Press
+// Start Search Button Press
 void MainWindow::on_searchButton_released()
 {
 
@@ -31,7 +31,7 @@ void MainWindow::on_searchButton_released()
     analyticsWindow = new AnalyticsWindow(this);
     RequestHandler *requestHandler = new RequestHandler(analyticsWindow, apiKey, summonerName, region);
 
-    // If Summoner Name was found
+    // If no Errors are returned
     if(requestHandler->handleRequest() == 1){
 
         // Show Analytics Window
