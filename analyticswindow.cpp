@@ -9,9 +9,15 @@ AnalyticsWindow::AnalyticsWindow(QWidget *parent) :
     ui(new Ui::AnalyticsWindow)
 {
     ui->setupUi(this);
+
     // Hide "?"
     this->setWindowFlag(Qt::WindowContextHelpButtonHint,false);
+
+    // Set Icon
     this->setWindowIcon(QPixmap(":/icons/include/tftStuff/tft_icon.png"));
+
+    // Set Fixed Size
+    this->setSizeGripEnabled(false);
 }
 
 // Destructor

@@ -9,7 +9,12 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // Set Icon
     this->setWindowIcon(QPixmap(":/icons/include/tftStuff/tft_icon.png"));
+
+    // Set Fixed Size
+    this->setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
 }
 
 // Destructor
