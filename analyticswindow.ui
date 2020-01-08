@@ -86,7 +86,7 @@ QTabBar::tab:selected {
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -142,7 +142,7 @@ QTabBar::tab:selected {
             </property>
             <property name="styleSheet">
              <string notr="true">font-style: italic;
-font-size: 30px;</string>
+font-size: 40px;</string>
             </property>
             <property name="text">
              <string>placeholder</string>
@@ -155,8 +155,7 @@ font-size: 30px;</string>
           <item row="0" column="1">
            <widget class="QLabel" name="label_data_summonerName">
             <property name="styleSheet">
-             <string notr="true">font-size: 80px;
-text-decoration: underline;</string>
+             <string notr="true">font-size: 80px;</string>
             </property>
             <property name="text">
              <string>placeholder</string>
@@ -201,6 +200,15 @@ background-color: rgb(0, 0, 0);</string>
        </item>
        <item row="2" column="0">
         <widget class="QFrame" name="frame">
+         <property name="styleSheet">
+          <string notr="true">font-size: 30px;
+color: white;
+text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;</string>
+         </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
@@ -210,6 +218,9 @@ background-color: rgb(0, 0, 0);</string>
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="0" column="1">
            <widget class="QLabel" name="label_data_tier">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
              <string>placeholder</string>
             </property>
@@ -224,7 +235,7 @@ background-color: rgb(0, 0, 0);</string>
              <string>placeholder</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignHCenter|Qt::AlignTop</set>
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -249,6 +260,20 @@ background-color: rgb(0, 0, 0);</string>
             </property>
             <property name="text">
              <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>placeholder</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>placeholder</string>
             </property>
            </widget>
           </item>
@@ -284,67 +309,109 @@ border-color: rgb(255, 170, 0);</string>
       </layout>
      </widget>
      <widget class="QWidget" name="statisticsTab">
+      <property name="styleSheet">
+       <string notr="true">QGroupBox {
+	border: 6px solid;
+	padding: 10px;
+	margin: 2px;
+	border-color: rgb(255, 170, 0);;
+}
+QWidget {
+	margin: 10px;
+}</string>
+      </property>
       <attribute name="title">
        <string>Statistics</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_7">
-       <item row="0" column="0">
-        <widget class="QGroupBox" name="groupBox">
-         <property name="styleSheet">
-          <string notr="true">margin-left: 5px;
-border: 0;</string>
-         </property>
+       <item row="0" column="1">
+        <widget class="QGroupBox" name="groupBox_2">
          <property name="title">
-          <string/>
+          <string>Summoner</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_6">
-          <item row="7" column="0">
-           <widget class="QLabel" name="label_favoriteComp">
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_3">
             <property name="text">
-             <string>Favorite Comp:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_winRate">
-            <property name="text">
-             <string>Win Rate:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="label_data_winRate">
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="label_hotStreak">
-            <property name="text">
-             <string>Hot Streak:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="label_data_losses">
-            <property name="text">
-             <string/>
+             <string>TextLabel</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLabel" name="label_data_gamesPlayed">
+           <widget class="QLabel" name="label_4">
             <property name="text">
-             <string/>
+             <string>TextLabel</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
-           <widget class="QLabel" name="label_data_hotStreak">
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>Team Compositions</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Favorite:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>2nd Favorite: </string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="0" rowspan="2">
+        <widget class="QGroupBox" name="groupBox">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="title">
+          <string>Ranked (Season 2)</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_data_gamesPlayed">
             <property name="text">
              <string/>
             </property>
@@ -373,15 +440,29 @@ border: 0;</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_wins">
+          <item row="6" column="1">
+           <widget class="QLabel" name="labeL_data_placementHistory">
             <property name="text">
-             <string>Wins:</string>
+             <string/>
             </property>
            </widget>
           </item>
-          <item row="7" column="1">
-           <widget class="QLabel" name="labeL_data_favoriteComp">
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_placementHistory">
+            <property name="text">
+             <string>Placement History</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_winRate">
+            <property name="text">
+             <string>Win Rate:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLabel" name="label_data_winRate">
             <property name="text">
              <string/>
             </property>
@@ -394,21 +475,33 @@ border: 0;</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="0">
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
+          <item row="5" column="1">
+           <widget class="QLabel" name="label_data_hotStreak">
+            <property name="text">
+             <string/>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Preferred</enum>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_wins">
+            <property name="text">
+             <string>Wins:</string>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>30</width>
-              <height>80</height>
-             </size>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_hotStreak">
+            <property name="text">
+             <string>Hot Streak:</string>
             </property>
-           </spacer>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="label_data_losses">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
