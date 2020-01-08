@@ -22,12 +22,12 @@ RequestHandler::RequestHandler(AnalyticsWindow *analyticsWindow_, QString apiKey
 
 
 // Orchestrate Process Procedure
-bool RequestHandler::handleRequest(){
+int RequestHandler::handleRequest(){
 
     // Get Summoner Info
     QJsonObject summonerData = querySummonerInfo(this->summonerName);
     if(summonerData.isEmpty()){
-        return false;
+        return 2;
     }
 
     // Get Ranked Info
@@ -40,7 +40,7 @@ bool RequestHandler::handleRequest(){
 
     // Get Match Info
     if(matchIDsData["matches"].isNull()){
-        return false;
+        return 3;
     }
     QJsonArray matchIds = matchIDsData["matches"].toArray();
     int maxMatches = 1;
@@ -66,7 +66,7 @@ bool RequestHandler::handleRequest(){
     // Forward Data for Visualisation
     Visualiser *visual = new Visualiser(analyticsWindow, summonerData, rankedData, matchIDsData, matchData);
     visual->fillGUI();
-    return true;
+    return 1;
 
 }
 

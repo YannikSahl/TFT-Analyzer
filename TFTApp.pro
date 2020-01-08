@@ -4,7 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
 
-INCLUDEPATH += "D:/Benutzer/Yannik/SynologyDrive/HTW/Module/3 (5) WP1 - Vertiefung in die Programmierung/Projekt/QT/TFTApp/include"
+INCLUDEPATH +=
 #$$PWD/include
 
 # The following define makes your compiler emit warnings if you use

@@ -16,7 +16,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void showError();
+    void showError(QString errorMessage);
 
 private slots:
     void on_searchButton_released();
