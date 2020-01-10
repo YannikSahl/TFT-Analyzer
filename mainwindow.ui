@@ -185,7 +185,7 @@ QComboBox::drop-down {
 </string>
       </property>
       <property name="currentText">
-       <string>BR</string>
+       <string>EUW</string>
       </property>
       <property name="iconSize">
        <size>

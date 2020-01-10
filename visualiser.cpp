@@ -1,5 +1,6 @@
 #include "visualiser.h"
 #include "analyticswindow.h"
+#include "datainquirer.h"
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QDebug>
@@ -37,12 +38,11 @@ void Visualiser::fillOverview(){
 
     // 1. Profile icon
     int profileIconId = summonerData["profileIconId"].toInt();
-    QString iconPath = "include\\tftStuff\\profileicon\\718.png";
-    //QString iconPath = "\\include\\tftStuff\\profileicon\\" + QString::number(profileIconId) + ".png";
-    //QString iconPath = "D:\\Benutzer\\Yannik\\SynologyDrive\\HTW\\Module\\3 (5) WP1 - Vertiefung in die Programmierung\\Projekt\\QT\\TFTApp\\include\\tftStuff\\profileicon\\718.png";
-    QPixmap profileIcon(iconPath);
-    QUrl url("http://ddragon.leagueoflegends.com/cdn/6.3.1/img/profileicon/718.png");
-
+    QString queryUrl = "http://ddragon.leagueoflegends.com/cdn/6.3.1/img/profileicon/" + QString::number(profileIconId )+ ".png";
+    DataInquirer *dataInq = new DataInquirer(queryUrl);
+    dataInq->queryRiotAPI();
+    QPixmap profileIcon;
+    profileIcon.loadFromData(dataInq->byteResponse);
     analyticsWindow->setLabel_ProfileIcon(profileIcon);
 
     // 1. Name
@@ -103,6 +103,18 @@ void Visualiser::fillStatistics(){
     analyticsWindow->setLabel_Wins(QString::number(wins));
     analyticsWindow->setLabel_Losses(QString::number(losses));
     analyticsWindow->setLabel_Winrate(winrateString);
+
+    bool hotStreak = rankedData["hotStreak"].toBool();
+    analyticsWindow->setLabel_HotStreak(hotStreak ? "Yes" : "No");
+
+    // Summoner Box
+    int summonerLevel = summonerData["summonerLevel"].toInt();
+    analyticsWindow->setLabel_summonerLevel(QString::number(summonerLevel));
+    bool activity = rankedData["inactive"].toBool();
+    analyticsWindow->setLabel_activityStatus(!activity ? "Active" : "Inactive");
+
+    // Team Comp Box
+
 
 
 }

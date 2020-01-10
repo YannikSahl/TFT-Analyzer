@@ -80,7 +80,7 @@ QTabBar::tab:selected {
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -160,18 +160,18 @@ font-size: 40px;</string>
             </property>
             <property name="minimumSize">
              <size>
-              <width>250</width>
-              <height>250</height>
+              <width>200</width>
+              <height>200</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>250</width>
-              <height>250</height>
+              <width>200</width>
+              <height>200</height>
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true"/>
+             <string notr="true">border-radius: 5px;</string>
             </property>
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -183,12 +183,6 @@ font-size: 40px;</string>
        </item>
        <item row="2" column="0">
         <widget class="QFrame" name="frame_summary">
-         <property name="font">
-          <font>
-           <family>MT Extra</family>
-           <pointsize>-1</pointsize>
-          </font>
-         </property>
          <property name="styleSheet">
           <string notr="true">font-size: 30px;</string>
          </property>
@@ -199,16 +193,10 @@ font-size: 40px;</string>
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_overview_lp">
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_overview_tier">
             <property name="text">
-             <string>With currently x LP</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <string>Ranked Tier is </string>
             </property>
            </widget>
           </item>
@@ -216,6 +204,26 @@ font-size: 40px;</string>
            <widget class="QLabel" name="label_overview_averagePlace">
             <property name="text">
              <string>Averages x Place</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_overview_winRate">
+            <property name="text">
+             <string>Win Rate of x %</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_overview_lp">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>With currently x LP</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -242,20 +250,6 @@ font-size: 40px;</string>
             </property>
             <property name="text">
              <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_overview_tier">
-            <property name="text">
-             <string>Ranked Tier is </string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_overview_winRate">
-            <property name="text">
-             <string>Win Rate of x%</string>
             </property>
            </widget>
           </item>
@@ -295,10 +289,13 @@ font-size: 40px;</string>
 	background: transparent;
 }
 
+
 QGroupBox {
 	border: 2px solid;
 	padding: 10px;
 	margin: 2px;
+	font-weight: bold;
+	font-style: italic;
 }
 
 QWidget {
@@ -333,7 +330,7 @@ QWidget {
           <item row="1" column="0">
            <widget class="QLabel" name="label_activity">
             <property name="text">
-             <string>Active: </string>
+             <string>Activity Status: </string>
             </property>
            </widget>
           </item>

@@ -14,6 +14,7 @@ public:
 
     // Attribute
     QJsonObject jsonData;
+    QByteArray byteResponse;
 
     // Constructor
     DataInquirer(QUrl url_);

@@ -30,12 +30,21 @@ public slots:
     void setLabel_AveragePlacements(QString averagePlacement);
 
 
-    // Statistics
+    // Statistics: Ranked Box
     void setLabel_Games(QString games);
     void setLabel_Wins(QString wins);
     void setLabel_Losses(QString losses);
     void setLabel_Winrate(QString winrate);
+    void setLabel_HotStreak(QString yesno);
+    void setLabel_Placements(QString placements);
+
+    // Statistics: Summoner Box
+    void setLabel_summonerLevel(QString summonerLevel);
+    void setLabel_activityStatus(QString active);
+
+    // Statistics: Team Comp Box
     void setLabel_FavoriteComp(QString comp);
+    void setLabel_FavoriteComp2(QString comp);
 
 
 private:

@@ -65,7 +65,7 @@ void AnalyticsWindow::setLabel_AveragePlacements(QString averagePlacement){
 
 
 
-// Slots Overview Ta
+// Slots Overview Tab: Ranked Box
 void AnalyticsWindow::setLabel_Games(QString games){
     ui->label_gamesPlayed_data->setText(games);
 }
@@ -82,7 +82,30 @@ void AnalyticsWindow::setLabel_Winrate(QString winrate){
     ui->label_winRate_data->setText(winrate);
 }
 
+void AnalyticsWindow::setLabel_HotStreak(QString yesno){
+    ui->label_hotStreak_data->setText(yesno);
+}
+
+void AnalyticsWindow::setLabel_Placements(QString placements){
+    ui->label_placementHistory_data->setText(placements);
+}
+
+// Slots Overview Tab: Summoner Box
+void AnalyticsWindow::setLabel_summonerLevel(QString summonerLevel){
+    ui->label_summonerLevel_data->setText(summonerLevel);
+}
+
+void AnalyticsWindow::setLabel_activityStatus(QString active){
+    ui->label_activity_data->setText(active);
+}
+
+
+// Slots Overview Tab: Team Comp Box
 void AnalyticsWindow::setLabel_FavoriteComp(QString comp){
-    //ui->labeL_data_favoriteComp->setText(comp);
+    ui->label_favorite_data->setText(comp);
+}
+
+void AnalyticsWindow::setLabel_FavoriteComp2(QString comp){
+    ui->label_favorite2_data->setText(comp);
 }
 
