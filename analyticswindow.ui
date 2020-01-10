@@ -10,15 +10,6 @@
     <height>722</height>
    </rect>
   </property>
-  <property name="font">
-   <font>
-    <family>Sans Serif</family>
-    <pointsize>-1</pointsize>
-    <weight>50</weight>
-    <italic>false</italic>
-    <bold>false</bold>
-   </font>
-  </property>
   <property name="windowTitle">
    <string>Gameplay Analytics</string>
   </property>
@@ -27,11 +18,22 @@
     <normaloff>../../tft_icon.png</normaloff>../../tft_icon.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(0, 0, 94);
-color: rgb(255, 170, 0);
+   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(7, 25, 43, 255), stop:1 rgba(19, 171, 194, 255));
 
-font: MS Sans Serif;
-font-size: 20px;</string>
+border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(240, 230, 210, 255), stop:1 rgba(206, 166, 82, 255));
+
+font-size: 20px;
+
+color: rgb(219, 189, 128);
+
+
+
+
+/*
+color: rgb(255, 170, 0);
+font: Segoe Print;
+background-color: rgb(0, 0, 94);
+</string>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -39,17 +41,12 @@ font-size: 20px;</string>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
-     <property name="font">
-      <font>
-       <family>Sans Serif</family>
-       <pointsize>-1</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
-      </font>
-     </property>
      <property name="styleSheet">
-      <string notr="true">QTabWidget::pane{
+      <string notr="true">*{
+	background: transparent;
+}
+
+QTabWidget::pane{
 	border: 0;
 }
 
@@ -58,10 +55,7 @@ QTabBar::tab {
 	font-weight: bold;
 	height: 30px;
 	width: 120px;
-   background: rgb(0, 0, 94);
 	border: 2px solid;
-	border-color: rgb(255, 170, 0);
-	color: rgb(255, 170, 0);
 	padding: 10px;
 	margin: 10px;
 	margin-right: 20px;
@@ -69,13 +63,13 @@ QTabBar::tab {
 }
 
 QTabBar::tab:hover {
-   background: rgb(255, 170, 0);
-	color: rgb(0, 0, 94);
+   color: black;
+    background: rgb(207, 168, 85);
 }
 
 QTabBar::tab:selected {
-	color: rgb(0, 0, 94);
-    background: rgb(255, 170, 0);
+	color: black;
+    background: rgb(207, 168, 85);
 }
 </string>
      </property>
@@ -101,15 +95,6 @@ QTabBar::tab:selected {
       <bool>false</bool>
      </property>
      <widget class="QWidget" name="tab_overview">
-      <property name="font">
-       <font>
-        <family>Sans Serif</family>
-        <pointsize>-1</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-       </font>
-      </property>
       <property name="styleSheet">
        <string notr="true"/>
       </property>
@@ -120,7 +105,7 @@ QTabBar::tab:selected {
        <item row="0" column="0">
         <widget class="QFrame" name="frame_nameAndRegion">
          <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255)</string>
+          <string notr="true"/>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -130,7 +115,7 @@ QTabBar::tab:selected {
          </property>
          <layout class="QGridLayout" name="gridLayout_5">
           <item row="1" column="1">
-           <widget class="QLabel" name="label_data_region">
+           <widget class="QLabel" name="label_overview_region">
             <property name="font">
              <font>
               <family>Sans Serif</family>
@@ -145,7 +130,7 @@ QTabBar::tab:selected {
 font-size: 40px;</string>
             </property>
             <property name="text">
-             <string>placeholder</string>
+             <string>EUW</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignHCenter|Qt::AlignTop</set>
@@ -153,12 +138,12 @@ font-size: 40px;</string>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLabel" name="label_data_summonerName">
+           <widget class="QLabel" name="label_overview_summonerName">
             <property name="styleSheet">
              <string notr="true">font-size: 80px;</string>
             </property>
             <property name="text">
-             <string>placeholder</string>
+             <string>Alvarny</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -166,7 +151,7 @@ font-size: 40px;</string>
            </widget>
           </item>
           <item row="0" column="0" rowspan="2">
-           <widget class="QLabel" name="label_picture_profileIcon">
+           <widget class="QLabel" name="label_overview_picture_profileIcon">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -186,9 +171,7 @@ font-size: 40px;</string>
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">border: 2px solid;
-border-color: rgb(255, 170, 0);
-background-color: rgb(0, 0, 0);</string>
+             <string notr="true"/>
             </property>
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -200,14 +183,14 @@ background-color: rgb(0, 0, 0);</string>
        </item>
        <item row="2" column="0">
         <widget class="QFrame" name="frame_summary">
+         <property name="font">
+          <font>
+           <family>MT Extra</family>
+           <pointsize>-1</pointsize>
+          </font>
+         </property>
          <property name="styleSheet">
-          <string notr="true">font-size: 30px;
-color: white;
-text-shadow:
-		-1px -1px 0 #000,
-		1px -1px 0 #000,
-		-1px 1px 0 #000,
-		1px 1px 0 #000;</string>
+          <string notr="true">font-size: 30px;</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -217,12 +200,12 @@ text-shadow:
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="0" column="1">
-           <widget class="QLabel" name="label_data_tier">
+           <widget class="QLabel" name="label_overview_lp">
             <property name="styleSheet">
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>With x LP</string>
+             <string>With currently x LP</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -230,7 +213,7 @@ text-shadow:
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLabel" name="label_data_leaguePoints">
+           <widget class="QLabel" name="label_overview_averagePlace">
             <property name="text">
              <string>Averages x Place</string>
             </property>
@@ -240,7 +223,7 @@ text-shadow:
            </widget>
           </item>
           <item row="0" column="2" rowspan="2">
-           <widget class="QLabel" name="label_picture_ranked">
+           <widget class="QLabel" name="label_overview_picture_ranked">
             <property name="minimumSize">
              <size>
               <width>250</width>
@@ -254,9 +237,8 @@ text-shadow:
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">border: 2px solid;
-border-color: rgb(255, 170, 0);
-background-color: rgb(0, 0, 0);</string>
+             <string notr="true">
+</string>
             </property>
             <property name="text">
              <string/>
@@ -264,14 +246,14 @@ background-color: rgb(0, 0, 0);</string>
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QLabel" name="label_recentGames">
+           <widget class="QLabel" name="label_overview_tier">
             <property name="text">
              <string>Ranked Tier is </string>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_winRate_2">
+           <widget class="QLabel" name="label_overview_winRate">
             <property name="text">
              <string>Win Rate of x%</string>
             </property>
@@ -295,8 +277,7 @@ background-color: rgb(0, 0, 0);</string>
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">border: 2px solid;
-border-color: rgb(255, 170, 0);</string>
+          <string notr="true">border: 6px solid;</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -310,15 +291,20 @@ border-color: rgb(255, 170, 0);</string>
      </widget>
      <widget class="QWidget" name="tab_statistics">
       <property name="styleSheet">
-       <string notr="true">QGroupBox {
-	border: 6px solid;
+       <string notr="true">*{
+	background: transparent;
+}
+
+QGroupBox {
+	border: 2px solid;
 	padding: 10px;
 	margin: 2px;
-	border-color: rgb(255, 170, 0);;
 }
+
 QWidget {
 	margin: 10px;
-}</string>
+}
+</string>
       </property>
       <attribute name="title">
        <string>Statistics</string>
@@ -338,7 +324,7 @@ QWidget {
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLabel" name="label_data_summonerLevel">
+           <widget class="QLabel" name="label_summonerLevel_data">
             <property name="text">
              <string/>
             </property>
@@ -352,7 +338,7 @@ QWidget {
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLabel" name="label_data_activity">
+           <widget class="QLabel" name="label_activity_data">
             <property name="text">
              <string/>
             </property>
@@ -375,7 +361,7 @@ QWidget {
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLabel" name="label_data_favorite">
+           <widget class="QLabel" name="label_favorite_data">
             <property name="text">
              <string/>
             </property>
@@ -389,7 +375,7 @@ QWidget {
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLabel" name="label_data_favorite2">
+           <widget class="QLabel" name="label_favorite2_data">
             <property name="text">
              <string/>
             </property>
@@ -411,7 +397,7 @@ QWidget {
          </property>
          <layout class="QGridLayout" name="gridLayout_6">
           <item row="0" column="1">
-           <widget class="QLabel" name="label_data_gamesPlayed">
+           <widget class="QLabel" name="label_gamesPlayed_data">
             <property name="text">
              <string/>
             </property>
@@ -434,14 +420,14 @@ QWidget {
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLabel" name="label_data_wins">
+           <widget class="QLabel" name="label_wins_data">
             <property name="text">
              <string/>
             </property>
            </widget>
           </item>
           <item row="6" column="1">
-           <widget class="QLabel" name="labeL_data_placementHistory">
+           <widget class="QLabel" name="label_placementHistory_data">
             <property name="text">
              <string/>
             </property>
@@ -462,21 +448,21 @@ QWidget {
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLabel" name="label_data_winRate">
+           <widget class="QLabel" name="label_winRate_data">
             <property name="text">
              <string/>
             </property>
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QLabel" name="labeL_losses">
+           <widget class="QLabel" name="label_losses">
             <property name="text">
              <string>Losses:</string>
             </property>
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QLabel" name="label_data_hotStreak">
+           <widget class="QLabel" name="label_hotStreak_data">
             <property name="text">
              <string/>
             </property>
@@ -497,7 +483,7 @@ QWidget {
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLabel" name="label_data_losses">
+           <widget class="QLabel" name="label_losses_data">
             <property name="text">
              <string/>
             </property>
@@ -508,22 +494,22 @@ QWidget {
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_MatchHistory">
-      <attribute name="title">
-       <string>LP History</string>
-      </attribute>
-     </widget>
-     <widget class="QWidget" name="tab_LPHistory">
+     <widget class="QWidget" name="tab_matchHistory">
       <attribute name="title">
        <string>Match History</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="tab_5">
+     <widget class="QWidget" name="tab_lpHistory">
+      <attribute name="title">
+       <string>LP History</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="tab_teamComps">
       <attribute name="title">
        <string>Team Comps</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="tab_6">
+     <widget class="QWidget" name="tab_top10">
       <attribute name="title">
        <string>Top 10</string>
       </attribute>

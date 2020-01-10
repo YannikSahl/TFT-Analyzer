@@ -22,7 +22,9 @@ public:
     Visualiser(AnalyticsWindow *analyticsWindow_, QJsonObject summonerData_, QJsonObject rankedData_, QJsonObject matchIDsData_, QVector<QJsonObject> matchData_);
 
     void fillGUI();
+
     void fillOverview();
+    void fillStatistics();
 
 
 signals:

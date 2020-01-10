@@ -27,7 +27,10 @@
    <double>1.000000000000000</double>
   </property>
   <property name="autoFillBackground">
-   <bool>true</bool>
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(7, 25, 43, 255), stop:1 rgba(19, 171, 194, 255));</string>
   </property>
   <property name="iconSize">
    <size>
@@ -60,7 +63,8 @@
     <cursorShape>ArrowCursor</cursorShape>
    </property>
    <property name="styleSheet">
-    <string notr="true">QWidget{background: rgb(0, 0, 94)}</string>
+    <string notr="true">background-color: transparent;
+color: rgb(207, 168, 85);</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="2">
@@ -106,17 +110,17 @@
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton{
-	background-color: rgb(255, 170, 0);
-	color: rgb(0, 0, 94);
+	background-color: rgb(207, 168, 85);
+	color: black;
 	border-radius: 15px;
 }
 
 QPushButton::hover{
-	background-color: rgb(218, 145, 0);
+	background-color: rgb(166, 133, 68);
 }
 
 QPushButton::pressed{
-	background-color: rgb(138, 92, 0);
+	background-color: rgb(99, 79, 40);
 }</string>
       </property>
       <property name="text">
@@ -161,10 +165,8 @@ QPushButton::pressed{
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox{
-	background-color: rgb(0, 0, 94);
-	color: rgb(255, 170, 0);
 	border: 2px solid;
-	border-color: rgb(255, 170, 0);
+	border-color: rgb(207, 168, 85);
 	border-radius: 15px;
 
 	padding-left: 10px;
@@ -172,20 +174,18 @@ QPushButton::pressed{
 }
 
 QComboBox::hover{
-	background-color: rgb(255, 170, 0);
-	color: rgb(0, 0, 94);
+	background-color: rgb(207, 168, 85);
+	color: black;
 }
 
 QComboBox::drop-down {
 	width: 0px;
-	color: rgb(255, 170, 0);
-
-	
+	color: rgb(255, 170, 0);	
 }
 </string>
       </property>
       <property name="currentText">
-       <string>EUW</string>
+       <string>BR</string>
       </property>
       <property name="iconSize">
        <size>
@@ -276,10 +276,9 @@ QComboBox::drop-down {
        <string/>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(0, 0, 94);
-color: rgb(255, 170, 0);
+       <string notr="true">
 border: 2px solid;
-border-color: rgb(255, 170, 0);
+border-color: rgb(207, 168, 85);
 border-radius: 15px;
 
 padding-left: 10px;

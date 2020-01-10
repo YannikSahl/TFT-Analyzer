@@ -17,6 +17,8 @@ public:
 
 
 public slots:
+
+    // Overview
     void setLabel_ProfileIcon(QPixmap profileIcon);
     void setLabel_RankedIcon(QPixmap profileIcon);
 
@@ -24,7 +26,11 @@ public slots:
     void setLabel_Region(QString region);
     void setLabel_Tier(QString tier);
     void setLabel_LP(QString lp);
+    void setLabel_WinRateDesc(QString winRate);
+    void setLabel_AveragePlacements(QString averagePlacement);
 
+
+    // Statistics
     void setLabel_Games(QString games);
     void setLabel_Wins(QString wins);
     void setLabel_Losses(QString losses);

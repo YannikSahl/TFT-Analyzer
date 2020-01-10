@@ -24,6 +24,9 @@ void Visualiser::fillGUI(){
     // Fill Overview Tab
     fillOverview();
 
+    // Fill Statistics Tab
+    fillStatistics();
+
 }
 
 
@@ -32,7 +35,7 @@ void Visualiser::fillGUI(){
 // Fills Overview Tab
 void Visualiser::fillOverview(){
 
-    // Profile icon
+    // 1. Profile icon
     int profileIconId = summonerData["profileIconId"].toInt();
     QString iconPath = "include\\tftStuff\\profileicon\\718.png";
     //QString iconPath = "\\include\\tftStuff\\profileicon\\" + QString::number(profileIconId) + ".png";
@@ -40,24 +43,23 @@ void Visualiser::fillOverview(){
     QPixmap profileIcon(iconPath);
     QUrl url("http://ddragon.leagueoflegends.com/cdn/6.3.1/img/profileicon/718.png");
 
-
     analyticsWindow->setLabel_ProfileIcon(profileIcon);
 
-    // Name
+    // 1. Name
     QString summonerName = summonerData["name"].toString();
     analyticsWindow->setLabel_Name(summonerName);
 
-    // Region
+    // 1. Region
     QJsonArray matchIDs = matchIDsData["matches"].toArray();
     QString region = matchIDs[0].toString().left(3);
     analyticsWindow->setLabel_Region(region);
 
-    // Tier and Rank
+    // 2. Tier and Rank
     QString tier = rankedData["tier"].toString();
     QString rank = rankedData["rank"].toString();
     analyticsWindow->setLabel_Tier(tier + " " + rank);
 
-    // Rank icon
+    // 2.Rank icon
     if(tier == "IRON"){analyticsWindow->setLabel_RankedIcon(QPixmap(":/icons/include/tftStuff/ranked-emblems/Emblem_Iron.png"));}
     if(tier == "BRONZE"){analyticsWindow->setLabel_RankedIcon(QPixmap(":/icons/include/tftStuff/ranked-emblems/Emblem_Bronze.png"));}
     if(tier == "SILVER"){analyticsWindow->setLabel_RankedIcon(QPixmap(":/icons/include/tftStuff/ranked-emblems/Emblem_Silver.png"));}
@@ -68,12 +70,29 @@ void Visualiser::fillOverview(){
     if(tier == "GRANDMASTER"){analyticsWindow->setLabel_RankedIcon(QPixmap(":/icons/include/tftStuff/ranked-emblems/Emblem_Grandmaster.png"));}
     if(tier == "CHALLENGER"){analyticsWindow->setLabel_RankedIcon(QPixmap(":/icons/include/tftStuff/ranked-emblems/Emblem_Challenger.png"));}
 
-
     // League Points
-    QString leaguePoints = QString::number(rankedData["leaguePoints"].toInt()) + " LP";
+    QString leaguePoints = QString::number(rankedData["leaguePoints"].toInt());
     analyticsWindow->setLabel_LP(leaguePoints);
 
-    // Games, Wins, Losses, Winrate
+    // Win Rate
+    int wins = rankedData["wins"].toInt();
+    int losses = rankedData["losses"].toInt();
+    int gamesPlayed = wins + losses;
+    double winrate = round(1000*(double)wins / gamesPlayed)/10;
+    QString winrateString = QString::number(winrate);
+    analyticsWindow->setLabel_WinRateDesc(winrateString);
+
+    // Average Place
+    QString placement = "3.7";
+    analyticsWindow->setLabel_AveragePlacements(placement);
+
+}
+
+
+
+void Visualiser::fillStatistics(){
+
+    // Ranked Box
     int wins = rankedData["wins"].toInt();
     int losses = rankedData["losses"].toInt();
     int gamesPlayed = wins + losses;
@@ -85,6 +104,5 @@ void Visualiser::fillOverview(){
     analyticsWindow->setLabel_Losses(QString::number(losses));
     analyticsWindow->setLabel_Winrate(winrateString);
 
-    // Favorite comp
 
 }
