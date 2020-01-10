@@ -71,6 +71,6 @@ void AnalyticsWindow::setLabel_Winrate(QString winrate){
 }
 
 void AnalyticsWindow::setLabel_FavoriteComp(QString comp){
-    ui->labeL_data_favoriteComp->setText(comp);
+    //ui->labeL_data_favoriteComp->setText(comp);
 }
 

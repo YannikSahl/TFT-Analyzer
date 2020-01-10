@@ -100,7 +100,7 @@ QTabBar::tab:selected {
      <property name="tabBarAutoHide">
       <bool>false</bool>
      </property>
-     <widget class="QWidget" name="overviewTab">
+     <widget class="QWidget" name="tab_overview">
       <property name="font">
        <font>
         <family>Sans Serif</family>
@@ -118,7 +118,7 @@ QTabBar::tab:selected {
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
-        <widget class="QFrame" name="frame_2">
+        <widget class="QFrame" name="frame_nameAndRegion">
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255)</string>
          </property>
@@ -199,7 +199,7 @@ background-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QFrame" name="frame">
+        <widget class="QFrame" name="frame_summary">
          <property name="styleSheet">
           <string notr="true">font-size: 30px;
 color: white;
@@ -222,7 +222,7 @@ text-shadow:
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>placeholder</string>
+             <string>With x LP</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -232,7 +232,7 @@ text-shadow:
           <item row="1" column="1">
            <widget class="QLabel" name="label_data_leaguePoints">
             <property name="text">
-             <string>placeholder</string>
+             <string>Averages x Place</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -264,16 +264,16 @@ background-color: rgb(0, 0, 0);</string>
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="label_recentGames">
             <property name="text">
-             <string>placeholder</string>
+             <string>Ranked Tier is </string>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="label_winRate_2">
             <property name="text">
-             <string>placeholder</string>
+             <string>Win Rate of x%</string>
             </property>
            </widget>
           </item>
@@ -281,7 +281,7 @@ background-color: rgb(0, 0, 0);</string>
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QFrame" name="frame_3">
+        <widget class="QFrame" name="frame_visualLine">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -308,7 +308,7 @@ border-color: rgb(255, 170, 0);</string>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="statisticsTab">
+     <widget class="QWidget" name="tab_statistics">
       <property name="styleSheet">
        <string notr="true">QGroupBox {
 	border: 6px solid;
@@ -325,36 +325,36 @@ QWidget {
       </attribute>
       <layout class="QGridLayout" name="gridLayout_7">
        <item row="0" column="1">
-        <widget class="QGroupBox" name="groupBox_2">
+        <widget class="QGroupBox" name="box_summonerData">
          <property name="title">
           <string>Summoner</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="0" column="0">
-           <widget class="QLabel" name="label_3">
+           <widget class="QLabel" name="label_summonerLevel">
             <property name="text">
-             <string>TextLabel</string>
+             <string>Summoner Level: </string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLabel" name="label_4">
+           <widget class="QLabel" name="label_data_summonerLevel">
             <property name="text">
-             <string>TextLabel</string>
+             <string/>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_5">
+           <widget class="QLabel" name="label_activity">
             <property name="text">
-             <string>TextLabel</string>
+             <string>Active: </string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLabel" name="label_6">
+           <widget class="QLabel" name="label_data_activity">
             <property name="text">
-             <string>TextLabel</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -362,36 +362,36 @@ QWidget {
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QGroupBox" name="groupBox_3">
+        <widget class="QGroupBox" name="box_teamCompData">
          <property name="title">
           <string>Team Compositions</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">
-           <widget class="QLabel" name="label_7">
+           <widget class="QLabel" name="label_favorite">
             <property name="text">
              <string>Favorite:</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLabel" name="label_8">
+           <widget class="QLabel" name="label_data_favorite">
             <property name="text">
-             <string>TextLabel</string>
+             <string/>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_9">
+           <widget class="QLabel" name="label_favorite2">
             <property name="text">
              <string>2nd Favorite: </string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLabel" name="label_10">
+           <widget class="QLabel" name="label_data_favorite2">
             <property name="text">
-             <string>TextLabel</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -399,7 +399,7 @@ QWidget {
         </widget>
        </item>
        <item row="0" column="0" rowspan="2">
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QGroupBox" name="box_rankedData">
          <property name="styleSheet">
           <string notr="true"/>
          </property>
@@ -450,7 +450,7 @@ QWidget {
           <item row="6" column="0">
            <widget class="QLabel" name="label_placementHistory">
             <property name="text">
-             <string>Placement History</string>
+             <string>Placement History:</string>
             </property>
            </widget>
           </item>
@@ -508,12 +508,12 @@ QWidget {
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_3">
+     <widget class="QWidget" name="tab_MatchHistory">
       <attribute name="title">
        <string>LP History</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="tab_4">
+     <widget class="QWidget" name="tab_LPHistory">
       <attribute name="title">
        <string>Match History</string>
       </attribute>

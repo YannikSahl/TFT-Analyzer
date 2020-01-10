@@ -28,7 +28,7 @@ void MainWindow::on_searchButton_released()
 {
 
     // Read User Input
-    QString apiKey = "RGAPI-67b6bdfc-3bee-43a9-8731-c10c930d16d6";
+    QString apiKey = "RGAPI-034abf14-034c-445c-9297-490c06534379";
     QString summonerName = ui->summonerNameLine->text();
     QString region = ui->regionChooserBox->currentText();
 
