@@ -1,14 +1,1 @@
-<RCC>
-    <qresource prefix="/icons">
-        <file>include/tftStuff/tft_icon.png</file>
-        <file>include/tftStuff/ranked-emblems/Emblem_Bronze.png</file>
-        <file>include/tftStuff/ranked-emblems/Emblem_Challenger.png</file>
-        <file>include/tftStuff/ranked-emblems/Emblem_Diamond.png</file>
-        <file>include/tftStuff/ranked-emblems/Emblem_Gold.png</file>
-        <file>include/tftStuff/ranked-emblems/Emblem_Grandmaster.png</file>
-        <file>include/tftStuff/ranked-emblems/Emblem_Iron.png</file>
-        <file>include/tftStuff/ranked-emblems/Emblem_Master.png</file>
-        <file>include/tftStuff/ranked-emblems/Emblem_Platinum.png</file>
-        <file>include/tftStuff/ranked-emblems/Emblem_Silver.png</file>
-    </qresource>
-</RCC>
+<RCC/>
