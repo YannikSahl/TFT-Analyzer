@@ -43,21 +43,24 @@ int RequestHandler::handleRequest(){
         return 3;
     }
     QJsonArray matchIds = matchIDsData["matches"].toArray();
-    int maxMatches = matchIds.size() < 50 ? matchIds.size() : 50;
+    int maxMatches = matchIds.size() < 10 ? matchIds.size() : 10;
 
     for(int i = 0; i < maxMatches; i++){
 
         // Get Single Match Id
         QString matchIdString = matchIds[i].toString();
-        qInfo() << "I: " << i;
+        qInfo() << "i: " << i << " with matchId " << matchIdString;
 
         // Query Match Info for That Match (in separate Thread)
+        queryMatchInfo(matchIdString);
+        /*
         QFuture<QJsonObject> matData = QtConcurrent::run(this, &RequestHandler::queryMatchInfo, matchIdString);
 
         // Try to not get blocked from API access
         if((i+1)%5 == 0){
             matData.waitForFinished();
         }
+        */
     }
 
     // Wait for all responses
@@ -137,6 +140,7 @@ QJsonObject RequestHandler::queryMatchInfo(QString matchId){
     // Get Response Data
     QJsonObject singleMatch = dataInq->jsonData;
     matchData.append(singleMatch);
+    qInfo() << "match id: " << matchId << ", this match:" << singleMatch.size() << ", list size:" << matchData.size();
     return dataInq->jsonData;
 
 }

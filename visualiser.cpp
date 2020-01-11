@@ -6,6 +6,9 @@
 #include <QDebug>
 #include <QPixmap>
 #include <QUrl>
+#include <chrono>
+
+using namespace std::chrono;
 
 
 Visualiser::Visualiser(AnalyticsWindow *analyticsWindow_, QJsonObject summonerData_, QJsonObject rankedData_, QJsonObject matchIDsData_, QVector<QJsonObject> matchData_)
@@ -50,7 +53,7 @@ void Visualiser::fillOverview(){
 
     // 1. Profile icon
     int profileIconId = summonerData["profileIconId"].toInt();
-    QString queryUrl = "http://ddragon.leagueoflegends.com/cdn/6.3.1/img/profileicon/" + QString::number(profileIconId )+ ".png";
+    QString queryUrl = "http://ddragon.leagueoflegends.com/cdn/10.1.1/img/profileicon/" + QString::number(profileIconId )+ ".png";
     DataInquirer *dataInq = new DataInquirer(queryUrl);
     dataInq->queryRiotAPI();
     QPixmap profileIcon;
@@ -139,6 +142,18 @@ void Visualiser::fillMatchHistory(){
 
         // Get "info" data
         QJsonObject infoData = match["info"].toObject();
+        uint64_t gameTime = (uint64_t)infoData["game_datetime"].toDouble();
+        uint64_t now = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+        double diffInDays = round((double)(now - gameTime)/1000/60/60/24);
+        QString daysAgo = QString::number(diffInDays) + " days ago";
+        qDebug().noquote() << "\nGame:\t" << gameTime;
+        qDebug().noquote() << "Now:\t" << now;
+        qDebug().noquote() << "Diff:\t" << daysAgo;
+
+        // Get metadata to print match_id
+        QJsonObject metaData = match["metadata"].toObject();
+        QString matchId = metaData["match_id"].toString();
+        qDebug().noquote() << "Match: " << matchId;
 
         // Get "participants" from "info"
         QJsonArray participantsArray = infoData["participants"].toArray();
@@ -157,14 +172,15 @@ void Visualiser::fillMatchHistory(){
                 int gold = participantData["gold_left"].toInt();
                 int level = participantData["level"].toInt();
                 int round = participantData["last_round"].toInt();
+                qDebug().noquote() << "\t Place: " << placement << "; Level: " << level << "; Round: " << round << "; Gold: " << gold;
 
                 // Get traits with num units
                 QHash<QString, int> traits = help_findTraitInfo(participantData);
-                qInfo() << "Traits: " << traits;
+                qDebug().noquote() << "\t Traits: " << traits;
 
                 // Get champions with star
                 QHash<QString, int> champions = help_findChampionInfo(participantData);
-                qInfo() << "Champions: " << champions;
+                qDebug().noquote() << "\t Champions: " << champions;
 
                 // Display values
 

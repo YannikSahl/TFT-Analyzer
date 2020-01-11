@@ -11,8 +11,6 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //
-
 
     // Set Icon
     this->setWindowIcon(QPixmap(":/include/tft_icon.png"));
@@ -24,6 +22,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     QSizePolicy sp_retain = ui->searchButton->sizePolicy();
     sp_retain.setRetainSizeWhenHidden(true);
     ui->searchButton->setSizePolicy(sp_retain);
+
+    // Temp
+    ui->summonerNameLine->setText("Alvarny");
+    ui->regionChooserBox->setCurrentText("EUW");
+
 }
 
 // Destructor
@@ -40,7 +43,7 @@ void MainWindow::on_searchButton_released()
     showLoadingSymbol(loadingLabel);
 
     // Read User Input
-    QString apiKey = "RGAPI-034abf14-034c-445c-9297-490c06534379";
+    QString apiKey = "RGAPI-333ae37b-d742-45e5-b947-580c14fd8d14";
     QString summonerName = ui->summonerNameLine->text();
     QString region = ui->regionChooserBox->currentText();
 

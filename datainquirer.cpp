@@ -17,7 +17,7 @@ DataInquirer::DataInquirer(QUrl url_)
 {
     url = url_;
 
-    qInfo() << "Created DataInquirer object with url:'" + url.toString();
+    qInfo().noquote() << "Created DataInquirer object with url:'" + url.toString();
 }
 
 
@@ -74,7 +74,7 @@ void DataInquirer::handleResult(QNetworkReply* reply){
         //qInfo() << "Response: " << response << "\n";
 
     } else{
-        qInfo() << "Error: " << reply->error();
+        qInfo() << "Error with URL: " << url << "; " << reply->error();
     }
 
     // Store QJsonObject
