@@ -4,17 +4,26 @@
 #include "requesthandler.h"
 #include <QMessageBox>
 #include <QPixmap>
+#include <QLabel>
+#include <QMovie>
 
 // Constructor
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //
+
 
     // Set Icon
-    this->setWindowIcon(QPixmap(":/icons/include/tftStuff/tft_icon.png"));
+    this->setWindowIcon(QPixmap(":/include/tft_icon.png"));
 
     // Set Fixed Size
     this->setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
+
+    // Set size policy to hide button
+    QSizePolicy sp_retain = ui->searchButton->sizePolicy();
+    sp_retain.setRetainSizeWhenHidden(true);
+    ui->searchButton->setSizePolicy(sp_retain);
 }
 
 // Destructor
@@ -26,6 +35,9 @@ MainWindow::~MainWindow()
 // Start Search Button Press
 void MainWindow::on_searchButton_released()
 {
+    // Show loading symbol
+    QLabel *loadingLabel = new QLabel(this);
+    showLoadingSymbol(loadingLabel);
 
     // Read User Input
     QString apiKey = "RGAPI-034abf14-034c-445c-9297-490c06534379";
@@ -54,6 +66,8 @@ void MainWindow::on_searchButton_released()
         showError(errorMessage);
     }
 
+    // Show search button again
+    hideLoadingSymbol(loadingLabel);
 
 }
 
@@ -64,7 +78,7 @@ void MainWindow::showError(QString errorMessage){
     QMessageBox msgBox;
     msgBox.setWindowTitle("Error");
     msgBox.setText(errorMessage);
-    msgBox.setWindowIcon(QPixmap(":/icons/include/tftStuff/tft_icon.png"));
+    msgBox.setWindowIcon(QPixmap(":/include/tft_icon.png"));
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.button(QMessageBox::Ok)->setText(" Try Again ");
     msgBox.button(QMessageBox::Ok)->setStyleSheet(""
@@ -72,8 +86,9 @@ void MainWindow::showError(QString errorMessage){
                                                   "padding: 4px;"
                                                   "background-color: rgb(207, 168, 85);"
                                                   "color: black;"
-                                                  "border-radius: 16px;"
+                                                  "border-radius: 12px;"
                                                   "margin: 15px;"
+                                                  "font-size: 16px;"
                                                   "}"
                                                   "QPushButton::hover{"
                                                   "background-color: rgb(166, 133, 68);"
@@ -107,4 +122,29 @@ void MainWindow::showError(QString errorMessage){
 void MainWindow::on_summonerNameLine_returnPressed()
 {
     on_searchButton_released();
+}
+
+
+// Hide button and show loading symbol
+void MainWindow::showLoadingSymbol(QLabel *lbl){
+
+    ui->searchButton->hide();
+
+    QMovie *movie = new QMovie(":/include/loader.gif");
+    lbl->setGeometry(ui->searchButton->pos().rx()-50, this->geometry().height()/2-100, 200, 200);
+    lbl->setMovie(movie);
+    lbl->setStyleSheet("background: transparent;");
+    lbl->show();
+    movie->start();
+
+}
+
+
+
+// Show button and hide loading symbol
+void MainWindow::hideLoadingSymbol(QLabel *lbl){
+
+    ui->searchButton->show();
+    lbl->hide();
+
 }

@@ -80,7 +80,7 @@ QTabBar::tab:selected {
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -493,7 +493,19 @@ QWidget {
      </widget>
      <widget class="QWidget" name="tab_matchHistory">
       <property name="styleSheet">
-       <string notr="true">border: 2px solid;</string>
+       <string notr="true">QFrame &gt; QFrame{
+	border: 2px solid;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+QFrame &gt; QLabel{
+	border: 0px solid;
+}
+
+QScrollArea{
+	border: 0;
+}</string>
       </property>
       <attribute name="title">
        <string>Match History</string>
@@ -501,6 +513,9 @@ QWidget {
       <layout class="QGridLayout" name="gridLayout_9">
        <item row="0" column="0">
         <widget class="QScrollArea" name="scrollArea">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="widgetResizable">
           <bool>true</bool>
          </property>
@@ -509,8 +524,8 @@ QWidget {
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1035</width>
-            <height>608</height>
+            <width>1039</width>
+            <height>612</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
@@ -522,6 +537,12 @@ QWidget {
                <height>160</height>
               </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>160</height>
+              </size>
+             </property>
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
              </property>
@@ -529,6 +550,66 @@ QWidget {
               <enum>QFrame::Raised</enum>
              </property>
              <layout class="QGridLayout" name="gridLayout_10">
+              <item row="0" column="1" rowspan="2">
+               <widget class="QFrame" name="frame_buffs">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>25</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_12">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="frame_buff_1">
+                   <property name="text">
+                    <string>2 Blademaster</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="frame_buff_2">
+                   <property name="text">
+                    <string>4 Shadow</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLabel" name="frame_buff_4">
+                   <property name="text">
+                    <string>1 Warden</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLabel" name="frame_buff_3">
+                   <property name="text">
+                    <string>2 Blademaster</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="frame_buff_5">
+                   <property name="text">
+                    <string>3 Light</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLabel" name="frame_buff_6">
+                   <property name="text">
+                    <string>1 Alchemist</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
               <item row="0" column="2" rowspan="2">
                <widget class="QFrame" name="frame_match_champions">
                 <property name="sizePolicy">
@@ -691,28 +772,10 @@ QWidget {
                </widget>
               </item>
               <item row="0" column="0" rowspan="2">
-               <widget class="QLabel" name="label_placement">
+               <widget class="QFrame" name="frame">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>10</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="font">
-                 <font>
-                  <pointsize>-1</pointsize>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>#1</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1" rowspan="2">
-               <widget class="QFrame" name="frame_buffs">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>25</horstretch>
+                  <horstretch>20</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
@@ -722,46 +785,43 @@ QWidget {
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QGridLayout" name="gridLayout_12">
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="frame_buff_1">
+                <layout class="QGridLayout" name="gridLayout_13">
+                 <item row="0" column="1">
+                  <widget class="QLabel" name="label_round">
                    <property name="text">
-                    <string>2 Blademaster</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="frame_buff_2">
-                   <property name="text">
-                    <string>4 Shadow</string>
+                    <string>Round: 26</string>
                    </property>
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QLabel" name="frame_buff_4">
+                  <widget class="QLabel" name="label_level">
                    <property name="text">
-                    <string>1 Warden</string>
+                    <string>Level: 8</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="1">
-                  <widget class="QLabel" name="frame_buff_3">
+                 <item row="0" column="0" rowspan="2">
+                  <widget class="QLabel" name="label_placement">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>20</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>-1</pointsize>
+                    </font>
+                   </property>
                    <property name="text">
-                    <string>2 Blademaster</string>
+                    <string>#1   </string>
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="frame_buff_5">
+                 <item row="2" column="0" colspan="2">
+                  <widget class="QLabel" name="label_37">
                    <property name="text">
-                    <string>3 Light</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1">
-                  <widget class="QLabel" name="frame_buff_6">
-                   <property name="text">
-                    <string>1 Alchemist</string>
+                    <string>4 days ago</string>
                    </property>
                   </widget>
                  </item>
@@ -769,62 +829,6 @@ QWidget {
                </widget>
               </item>
              </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QFrame" name="frame_3">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QFrame" name="frame_4">
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QFrame" name="frame_5">
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QFrame" name="frame_6">
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QFrame" name="frame_7">
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
             </widget>
            </item>
           </layout>
@@ -839,9 +843,146 @@ QWidget {
       </attribute>
      </widget>
      <widget class="QWidget" name="tab_teamComps">
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid;</string>
+      </property>
       <attribute name="title">
        <string>Team Comps</string>
       </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QFrame" name="frame_12">
+         <property name="styleSheet">
+          <string notr="true">text-decoration: underline;</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>80</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Team Composition</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>10</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Play Rate</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>10</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Win Rate</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_14">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>120</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>120</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">/*text-decoration: underline;</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <widget class="QLabel" name="label_28">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>80</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>6 Blademaster, 4 Assassin, 3 Steel</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_29">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>10</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>20%</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_30">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>10</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>42%</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="tab_top10">
       <attribute name="title">

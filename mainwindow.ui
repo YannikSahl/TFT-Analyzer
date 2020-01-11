@@ -63,8 +63,10 @@
     <cursorShape>ArrowCursor</cursorShape>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: transparent;
-color: rgb(207, 168, 85);</string>
+    <string notr="true">*{
+background: transparent;
+color: rgb(207, 168, 85);
+}</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="2">
@@ -92,6 +94,12 @@ color: rgb(207, 168, 85);</string>
        </sizepolicy>
       </property>
       <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="maximumSize">
        <size>
         <width>100</width>
         <height>30</height>
@@ -148,7 +156,13 @@ QPushButton::pressed{
      <widget class="QComboBox" name="regionChooserBox">
       <property name="minimumSize">
        <size>
-        <width>60</width>
+        <width>70</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>70</width>
         <height>30</height>
        </size>
       </property>
@@ -255,7 +269,13 @@ QComboBox::drop-down {
       </property>
       <property name="minimumSize">
        <size>
-        <width>250</width>
+        <width>275</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>275</width>
         <height>30</height>
        </size>
       </property>

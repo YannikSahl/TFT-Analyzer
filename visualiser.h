@@ -25,6 +25,13 @@ public:
 
     void fillOverview();
     void fillStatistics();
+    void fillMatchHistory();
+    void fillLPHistory();
+    void fillTeamComps();
+    void fillTop10();
+
+    QHash<QString, int> help_findTraitInfo(QJsonObject participantData);
+    QHash<QString, int> help_findChampionInfo(QJsonObject participantData);
 
 
 signals:

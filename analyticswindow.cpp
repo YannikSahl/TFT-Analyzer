@@ -14,7 +14,7 @@ AnalyticsWindow::AnalyticsWindow(QWidget *parent) :
     this->setWindowFlag(Qt::WindowContextHelpButtonHint,false);
 
     // Set Icon
-    this->setWindowIcon(QPixmap(":/icons/include/tftStuff/tft_icon.png"));
+    this->setWindowIcon(QPixmap(":/include/tft_icon.png"));
 
     // Set Fixed Size
     this->setSizeGripEnabled(false);
@@ -47,11 +47,11 @@ void AnalyticsWindow::setLabel_Region(QString region){
 }
 
 void AnalyticsWindow::setLabel_Tier(QString tier){
-    ui->label_overview_tier->setText("Ranked Tier is " + tier);
+    ui->label_overview_tier->setText("Rank is " + tier);
 }
 
 void AnalyticsWindow::setLabel_LP(QString lp){
-    ui->label_overview_lp->setText("With currently " + lp + " LP");
+    ui->label_overview_lp->setText("Currently " + lp + " LP");
 }
 
 void AnalyticsWindow::setLabel_WinRateDesc(QString winRate){

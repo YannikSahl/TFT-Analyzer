@@ -61,7 +61,6 @@ void DataInquirer::handleResult(QNetworkReply* reply){
         // Manipulate Match IDs (god damnit riot, can you be concise for once)
         response = manipulateMatchIds(response);
         byteResponse = response;
-        qInfo() << "Byte Response: "  << byteResponse;
 
         // Manipulate Ranked data
         response = manipulateRankedData(response); 

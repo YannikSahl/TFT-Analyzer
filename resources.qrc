@@ -66,5 +66,6 @@
         <file>include/champions/Yorick.jpg</file>
         <file>include/champions/Zed.jpg</file>
         <file>include/champions/Zyra.jpg</file>
+        <file>include/loader.gif</file>
     </qresource>
 </RCC>
