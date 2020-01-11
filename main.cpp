@@ -9,13 +9,14 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // Create and show main window
-
+    /*
     MainWindow mainWin;
     mainWin.show();
-    /*
+    */
+
     AnalyticsWindow analWin;
     analWin.show();
-    */
+
 
     // Handler loop
     return a.exec();

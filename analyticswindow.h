@@ -46,6 +46,10 @@ public slots:
     void setLabel_FavoriteComp(QString comp);
     void setLabel_FavoriteComp2(QString comp);
 
+    // Match History
+    void initializeMatchHistoryTab();
+    void addMatch(QString placement, QString level, QString round, QString daysAgo, QHash<QString, int> traits, QHash<QString, int> champions);
+
 
 private:
     Ui::AnalyticsWindow *ui;

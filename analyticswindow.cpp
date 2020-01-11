@@ -1,7 +1,7 @@
 #include "analyticswindow.h"
 #include "ui_analyticswindow.h"
 #include <QPixmap>
-
+#include <QVBoxLayout>
 
 // Constructor
 AnalyticsWindow::AnalyticsWindow(QWidget *parent) :
@@ -17,7 +17,11 @@ AnalyticsWindow::AnalyticsWindow(QWidget *parent) :
     this->setWindowIcon(QPixmap(":/include/tft_icon.png"));
 
     // Set Fixed Size
-    this->setSizeGripEnabled(false);
+    this->setFixedSize(this->size());
+
+    // Initialize Match History Tab
+    initializeMatchHistoryTab();
+
 }
 
 // Destructor
@@ -65,7 +69,7 @@ void AnalyticsWindow::setLabel_AveragePlacements(QString averagePlacement){
 
 
 
-// Slots Overview Tab: Ranked Box
+// Slots Statistics Tab: Ranked Box
 void AnalyticsWindow::setLabel_Games(QString games){
     ui->label_gamesPlayed_data->setText(games);
 }
@@ -109,3 +113,48 @@ void AnalyticsWindow::setLabel_FavoriteComp2(QString comp){
     ui->label_favorite2_data->setText(comp);
 }
 
+
+// Slots Match History Tab: Initialize Tab
+void AnalyticsWindow::initializeMatchHistoryTab(){
+
+    // Show borders
+    ui->tab_lpHistory->setStyleSheet("border: 2px solid;");
+
+    // Add layout to tab
+    QVBoxLayout *tabVLayout = new QVBoxLayout(ui->tab_lpHistory);
+    ui->tab_lpHistory->setLayout(tabVLayout);
+
+    // Add scroll area
+    QScrollArea *scrollArea = new QScrollArea(ui->tab_lpHistory);
+    tabVLayout->addWidget(scrollArea);
+
+    // Custome scroll area layout
+    QVBoxLayout *scrollVLayout = new QVBoxLayout(scrollArea);
+    scrollArea->setLayout(scrollVLayout);
+    scrollArea->setWidgetResizable( true );
+
+    // Add wiget
+    QWidget *scrollContents = new QWidget();
+    scrollArea->setWidget(scrollContents);
+
+    // Customize widget layout
+    QVBoxLayout *layout = new QVBoxLayout();
+    scrollContents->setLayout( layout );
+
+    // Add widget to layout
+    for(int i = 0; i < 10; i ++){
+        QLabel *lbl = new QLabel(this);
+        lbl->setText("test" + QString::number(i));
+        lbl->setFixedHeight(200);
+        layout->addWidget(lbl);
+    }
+
+
+}
+
+// Slots Match History Tab: Add Match
+void AnalyticsWindow::addMatch(QString placement, QString level, QString round, QString daysAgo, QHash<QString, int> traits, QHash<QString, int> champions){
+
+
+
+}
