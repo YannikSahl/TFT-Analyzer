@@ -43,7 +43,7 @@ int RequestHandler::handleRequest(){
         return 3;
     }
     QJsonArray matchIds = matchIDsData["matches"].toArray();
-    int maxMatches = matchIds.size() < 1 ? matchIds.size() : 1;
+    int maxMatches = matchIds.size() < 5 ? matchIds.size() : 5;
 
     for(int i = 0; i < maxMatches; i++){
 

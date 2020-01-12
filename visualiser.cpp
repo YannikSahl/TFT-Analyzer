@@ -145,10 +145,7 @@ void Visualiser::fillMatchHistory(){
         uint64_t gameTime = (uint64_t)infoData["game_datetime"].toDouble();
         uint64_t now = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
         double diffInDays = round((double)(now - gameTime)/1000/60/60/24);
-        QString daysAgo = QString::number(diffInDays) + " days ago";
-        qDebug().noquote() << "\nGame:\t" << gameTime;
-        qDebug().noquote() << "Now:\t" << now;
-        qDebug().noquote() << "Diff:\t" << daysAgo;
+        QString daysAgo = QString::number(diffInDays);
 
         // Get metadata to print match_id
         QJsonObject metaData = match["metadata"].toObject();
@@ -171,8 +168,7 @@ void Visualiser::fillMatchHistory(){
                 int placement = participantData["placement"].toInt();
                 int gold = participantData["gold_left"].toInt();
                 int level = participantData["level"].toInt();
-                int round = participantData["last_round"].toInt();
-                qDebug().noquote() << "\t Place: " << placement << "; Level: " << level << "; Round: " << round << "; Gold: " << gold;
+                int round = participantData["last_round"].toInt(); 
 
                 // Get traits with num units
                 QList<Trait> traits = help_findTraitInfo(participantData);
@@ -262,11 +258,20 @@ QList<Champion> Visualiser::help_findChampionInfo(QJsonObject participantData){
         QJsonObject championData = championsArray[i].toObject();
 
         // Add to hash
-        QString championName = championData["name"].toString();
+        QString championName = championData["character_id"].toString();
         int championTier = championData["tier"].toInt();
         int championCost = championData["rarity"].toInt() + 1;
 
-        Champion champ(championName, championCost, championTier);
+        // Remove "TFT_2" and "Ocean/..." in LuxOcean
+        if(championName[4] == "_"){
+            championName = championName.mid(5);
+        }
+        if(championName.contains("Lux")){
+            championName = "Lux";
+        }
+
+        // Create champion object
+        Champion champ(championName, championTier, championCost);
         championInfo.append(champ);
 
     }

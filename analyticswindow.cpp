@@ -118,7 +118,7 @@ void AnalyticsWindow::setLabel_FavoriteComp2(QString comp){
 // Slots Match History Tab: Initialize Tab
 void AnalyticsWindow::initializeMatchHistoryTab(){
 
-    // Show borders
+    // Show border
     ui->tab_lpHistory->setStyleSheet("border: 2px solid;");
 
     // Add layout to tab
@@ -141,6 +141,10 @@ void AnalyticsWindow::initializeMatchHistoryTab(){
     // Customize widget layout
     layout = new QVBoxLayout();
     scrollContents->setLayout( layout );
+
+    // Set margin, padding
+    scrollArea->setStyleSheet("QScrollArea > QWidget{margin: 0px;}"
+                              "QScrollArea{border: 0;}");
 
 }
 

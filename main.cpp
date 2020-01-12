@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     analWin.show();
     */
 
+
     // Handler loop
     return a.exec();
 }
