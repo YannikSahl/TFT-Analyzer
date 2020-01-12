@@ -90,8 +90,11 @@ void MatchWidget::customize(QString placement, QString level, QString round, QSt
         labelChamp_rank = new QLabel(frameTeamInfo_championsLevel);
 
         // Set text
-        //QString champ = champions[i];
-        labelChamp->setText("");
+        Champion champion = champions[i];
+        QString championName = champion.championName;
+        QString championTier = QString::number(champion.championTier);
+        labelChamp->setText(championName);
+        labelChamp_rank->setText(championTier);
 
         // Add to layout
         frameTeamInfo_champions_layout->addWidget(labelChamp);
