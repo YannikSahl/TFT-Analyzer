@@ -1,4 +1,4 @@
-#include "matchwidget.h"
+﻿#include "matchwidget.h"
 #include <QVBoxLayout>
 #include <QDebug>
 
@@ -108,8 +108,21 @@ void MatchWidget::customize(QString placement, QString level, QString round, QSt
                                   "font-weight: bold;"
                                   );
 
-    // Fill in frameCompInfo
-    for(int i = 0; i < traits.size(); i++){
+    // Iterate over Traits
+    for(Trait trait : traits){
+
+        // Add to label if played
+        if(trait.numUnits > labelTeamComp1->text().toInt()){
+            labelTeamComp2->setText(labelTeamComp1->text());
+            labelTeamComp1->setText(QString::number(trait.numUnits) + " " + trait.traitName);
+        }
+        else if(trait.numUnits > labelTeamComp2->text().toInt()){
+            labelTeamComp3->setText(labelTeamComp2->text());
+            labelTeamComp1->setText(QString::number(trait.numUnits) + " " + trait.traitName);
+        }
+        else if(trait.numUnits > labelTeamComp3->text().toInt()){
+            labelTeamComp1->setText(QString::number(trait.numUnits) + " " + trait.traitName);
+        }
 
     }
     labelTeamComp1->setText("6 Blademaster");
@@ -127,6 +140,7 @@ void MatchWidget::customize(QString placement, QString level, QString round, QSt
         labelChamp->setFixedSize(50, 50);
         labelChamp_rank->setFixedSize(50, 20);
         labelChamp_rank->setAlignment(Qt::AlignHCenter);
+
 
         // Champion data
         Champion champion = champions[i];
@@ -151,6 +165,7 @@ void MatchWidget::customize(QString placement, QString level, QString round, QSt
         if(championCost == "4"){labelChamp->setStyleSheet("border-color: purple;");}
         if(championCost == "5"){labelChamp->setStyleSheet("border-color: orange;");}
         if(championCost == "7"){labelChamp->setStyleSheet("border-color: white;");}
+        labelChamp->setStyleSheet("border: 2px solid;");
 
         // Add to layout
         frameTeamInfo_champions_layout->addWidget(labelChamp);
