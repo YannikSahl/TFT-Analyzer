@@ -133,6 +133,7 @@ QJsonObject RequestHandler::queryMatchInfo(QString matchId){
     queryString = "https://" + regionFormat + ".api.riotgames.com/tft/match/v1/matches/" + matchId + "?api_key=" + apiKey;
     queryUrl.setUrl(queryString);
 
+
     // Inquire Data
     dataInq = new DataInquirer(queryUrl);
     dataInq->queryRiotAPI();

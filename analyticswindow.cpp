@@ -3,6 +3,7 @@
 #include <QPixmap>
 #include <QVBoxLayout>
 #include <QDebug>
+#include <QScrollBar>
 
 // Constructor
 AnalyticsWindow::AnalyticsWindow(QWidget *parent) :
@@ -118,15 +119,14 @@ void AnalyticsWindow::setLabel_FavoriteComp2(QString comp){
 // Slots Match History Tab: Initialize Tab
 void AnalyticsWindow::initializeMatchHistoryTab(){
 
-    // Show border
-    ui->tab_lpHistory->setStyleSheet("border: 2px solid;");
-
     // Add layout to tab
-    tabVLayout = new QVBoxLayout(ui->tab_lpHistory);
-    ui->tab_lpHistory->setLayout(tabVLayout);
+    tabVLayout = new QVBoxLayout(ui->tab_matchHistory);
+    ui->tab_matchHistory->setLayout(tabVLayout);
 
     // Add scroll area
-    scrollArea = new QScrollArea(ui->tab_lpHistory);
+    scrollArea = new QScrollArea(ui->tab_matchHistory);
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     tabVLayout->addWidget(scrollArea);
 
     // Custom scroll area layout
@@ -151,10 +151,30 @@ void AnalyticsWindow::initializeMatchHistoryTab(){
 // Slots Match History Tab: Add Match
 void AnalyticsWindow::addMatch(QString placement, QString level, QString round, QString daysAgo, QList<Trait> traits, QList<Champion> champions){
 
-
+    // Add match
     MatchWidget *match = new MatchWidget(placement, level, round, daysAgo, traits, champions, this);
     layout->addWidget(match);
+
+    /*
+    // Add spacer
+    QFrame *spacerFrame = new QFrame(this);
+    spacerFrame->setFixedHeight(4);
+    layout->addWidget(spacerFrame);
+    */
+
     qInfo() << "Added widget!";
 
 
+}
+
+
+// Scroll to top on click
+void AnalyticsWindow::on_tabWidget_tabBarClicked(int index)
+{
+    // If Match History is chosen
+    if(index == 2){
+        QScrollBar *vScrollBar = scrollArea->verticalScrollBar();
+        vScrollBar->triggerAction(QScrollBar::SliderToMinimum);
+        qInfo() << "Scrolled! Index: " << index;
+    }
 }

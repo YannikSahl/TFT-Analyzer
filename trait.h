@@ -13,6 +13,8 @@ public:
     int tierCurrent;
     int tierTotal;
 
+    bool operator <(const Trait &traitObj) const;
+
 };
 
 #endif // TRAIT_H

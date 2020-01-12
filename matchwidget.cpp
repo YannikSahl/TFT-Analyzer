@@ -17,7 +17,6 @@ void MatchWidget::initialize(){
 
     // Set size
     this->setFixedHeight(160);
-    this->setStyleSheet("border: 0.5px solid;");
 
     // Apply horizontal layout to MatchWidget
     matchWidget_layout = new QHBoxLayout(this);
@@ -29,6 +28,7 @@ void MatchWidget::initialize(){
     matchWidget_layout->addWidget(frameGameInfo);
     matchWidget_layout->addWidget(frameCompInfo);
     matchWidget_layout->addWidget(frameTeamInfo);
+
 
     // Set Layout Main Container
     frameGameInfo_layout = new QGridLayout(frameGameInfo);
@@ -60,14 +60,6 @@ void MatchWidget::initialize(){
     frameGameInfo_layout->addWidget(labelRound, 1, 1);
     frameGameInfo_layout->addWidget(labelDaysAgo, 2, 1);
 
-    // Add label to frameCompInfo
-    labelTeamComp1 = new QLabel(frameCompInfo);
-    labelTeamComp2 = new QLabel(frameCompInfo);
-    labelTeamComp3 = new QLabel(frameCompInfo);
-    frameCompInfo_layout->addWidget(labelTeamComp1);
-    frameCompInfo_layout->addWidget(labelTeamComp2);
-    frameCompInfo_layout->addWidget(labelTeamComp3);
-
     // Set sizes main container
     frameGameInfo->setFixedWidth(220);
     frameCompInfo->setFixedWidth(170);
@@ -87,6 +79,11 @@ void MatchWidget::initialize(){
                                  "}"
                                  );
 
+    frameGameInfo->setStyleSheet(".QFrame{"
+                                 "border-right: 2px solid;"
+                                 "border-color: rgb(219, 189, 128);"
+                                 "}");
+
 }
 
 
@@ -97,7 +94,13 @@ void MatchWidget::customize(QString placement, QString level, QString round, QSt
     QString placementString = "#" + placement;
     QString levelString = "Level: " + level;
     QString roundString = "Round: " + round;
-    QString daysAgoString = daysAgo + " days ago";
+    QString daysAgoString = "";
+    if(daysAgo == "1"){
+        daysAgoString = daysAgo + " day ago";
+    }else{
+        daysAgoString = daysAgo + " days ago";
+    }
+
     labelPlacement->setText(placementString);
     labelLevel->setText(levelString);
     labelRound->setText(roundString);
@@ -108,28 +111,36 @@ void MatchWidget::customize(QString placement, QString level, QString round, QSt
                                   "font-weight: bold;"
                                   );
 
-    // Iterate over Traits
-    for(Trait trait : traits){
+    // Sort traits by numunits
+    qSort(traits.begin(), traits.end());
 
-        // Add to label if played
-        if(trait.numUnits > labelTeamComp1->text().toInt()){
-            labelTeamComp2->setText(labelTeamComp1->text());
-            labelTeamComp1->setText(QString::number(trait.numUnits) + " " + trait.traitName);
-        }
-        else if(trait.numUnits > labelTeamComp2->text().toInt()){
-            labelTeamComp3->setText(labelTeamComp2->text());
-            labelTeamComp1->setText(QString::number(trait.numUnits) + " " + trait.traitName);
-        }
-        else if(trait.numUnits > labelTeamComp3->text().toInt()){
-            labelTeamComp1->setText(QString::number(trait.numUnits) + " " + trait.traitName);
-        }
+    // Temp counter
+    int counter = 0;
 
+    // Create trait label
+    for(int i = traits.size()-1; counter < 4 && i >= 0 ; i--){
+
+        // Get trait data
+        QLabel *labelTeamComp = new QLabel(frameCompInfo);
+        Trait trait = traits[i];
+        QString unitsTrait = QString::number(trait.numUnits);
+        QString nameTrait = trait.traitName;
+        int currentTierTrait = trait.tierCurrent;
+        if(nameTrait.contains("_")){ nameTrait = nameTrait.mid(5);}
+
+        // Only if first buff is reached
+        if(currentTierTrait>0){
+            // Add to label
+            labelTeamComp->setText(unitsTrait + "  " + nameTrait);
+            frameCompInfo_layout->addWidget(labelTeamComp);
+            counter++;
+        }
     }
-    labelTeamComp1->setText("6 Blademaster");
-    labelTeamComp2->setText("6 Blademaster");
-    labelTeamComp3->setText("6 Blademaster");
 
-    // Add label to frameTeamInfo
+    // Sort champions by cost
+    qSort(champions.begin(), champions.end());
+
+    // Add labels to frameTeamInfo
     for(int i = 0; i < champions.size(); i++){
 
         // Create label
@@ -140,7 +151,6 @@ void MatchWidget::customize(QString placement, QString level, QString round, QSt
         labelChamp->setFixedSize(50, 50);
         labelChamp_rank->setFixedSize(50, 20);
         labelChamp_rank->setAlignment(Qt::AlignHCenter);
-
 
         // Champion data
         Champion champion = champions[i];
@@ -159,13 +169,12 @@ void MatchWidget::customize(QString placement, QString level, QString round, QSt
         if(championTier == "3"){labelChamp_rank->setText("***");}
 
         // Set border according to cost
-        if(championCost == "1"){labelChamp->setStyleSheet("border-color: grey;");}
-        if(championCost == "2"){labelChamp->setStyleSheet("border-color: green;");}
-        if(championCost == "3"){labelChamp->setStyleSheet("border-color: blue;");}
-        if(championCost == "4"){labelChamp->setStyleSheet("border-color: purple;");}
-        if(championCost == "5"){labelChamp->setStyleSheet("border-color: orange;");}
-        if(championCost == "7"){labelChamp->setStyleSheet("border-color: white;");}
-        labelChamp->setStyleSheet("border: 2px solid;");
+        if(championCost == "1"){labelChamp->setStyleSheet("border: 2px solid; border-color: grey;");}
+        if(championCost == "2"){labelChamp->setStyleSheet("border: 2px solid; border-color: green;");}
+        if(championCost == "3"){labelChamp->setStyleSheet("border: 2px solid; border-color: blue;");}
+        if(championCost == "4"){labelChamp->setStyleSheet("border: 2px solid; border-color: purple;");}
+        if(championCost == "5"){labelChamp->setStyleSheet("border: 2px solid; border-color: orange;");}
+        if(championCost == "6"){labelChamp->setStyleSheet("border: 2px solid; border-color: white;");}
 
         // Add to layout
         frameTeamInfo_champions_layout->addWidget(labelChamp);

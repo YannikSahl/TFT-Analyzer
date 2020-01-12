@@ -37,11 +37,6 @@ private:
     QLabel *labelRound;
     QLabel *labelDaysAgo;
 
-    // Labels for frameCompInfo
-    QLabel *labelTeamComp1;
-    QLabel *labelTeamComp2;
-    QLabel *labelTeamComp3;
-
     // Labels for frameTeamInfo_champions, frameTeamInfo_championsLevel
     QLabel *labelChamp;
     QLabel *labelChamp_rank;

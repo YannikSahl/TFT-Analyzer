@@ -56,6 +56,10 @@ public slots:
     void addMatch(QString placement, QString level, QString round, QString daysAgo, QList<Trait> traits, QList<Champion> champions);
 
 
+private slots:
+
+    void on_tabWidget_tabBarClicked(int index);
+
 private:
     Ui::AnalyticsWindow *ui;
 

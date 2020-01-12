@@ -137,6 +137,12 @@ void Visualiser::fillStatistics(){
 // Fills Match History Tab
 void Visualiser::fillMatchHistory(){
 
+    // Calculate average placement
+    double placementAverage = 0;
+
+    // Prepare statistics recent placement string
+    QString recentPlacements;
+
     // Iterate over Matches
     for(QJsonObject match : matchData){
 
@@ -170,6 +176,14 @@ void Visualiser::fillMatchHistory(){
                 int level = participantData["level"].toInt();
                 int round = participantData["last_round"].toInt(); 
 
+                // Add to recentPlacements
+                if(recentPlacements.length() < 30){
+                    recentPlacements += QString::number(placement) + ", ";
+                }
+
+                // Add to average
+                placementAverage += placement;
+
                 // Get traits with num units
                 QList<Trait> traits = help_findTraitInfo(participantData);
 
@@ -182,6 +196,16 @@ void Visualiser::fillMatchHistory(){
             }
         }
     }
+
+    // Show average
+    placementAverage /= (double) matchData.length();
+    analyticsWindow->setLabel_AveragePlacements(QString::number(placementAverage));
+
+    // Show recent placements
+    qInfo() << "Davor: " << recentPlacements;
+    recentPlacements = recentPlacements.left(recentPlacements.size()-2);
+    qInfo() << "Danach: " << recentPlacements;
+    analyticsWindow->setLabel_Placements(recentPlacements);
 }
 
 
@@ -268,6 +292,9 @@ QList<Champion> Visualiser::help_findChampionInfo(QJsonObject participantData){
         }
         if(championName.contains("Lux")){
             championName = "Lux";
+        }
+        if(championName.contains("Qiyana")){
+            championName = "Qiyana";
         }
 
         // Create champion object

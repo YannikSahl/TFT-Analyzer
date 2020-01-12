@@ -11,6 +11,8 @@ public:
     QString championName;
     int championCost;
     int championTier;
+
+    bool operator <(const Champion &championObj) const;
 };
 
 #endif // CHAMPION_H
