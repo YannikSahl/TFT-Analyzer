@@ -589,7 +589,7 @@ QScrollArea{
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
-            <widget class="QFrame" name="frame_match_2">
+            <widget class="QWidget" name="widget_match_2" native="true">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -602,12 +602,6 @@ QScrollArea{
                <height>160</height>
               </size>
              </property>
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
              <layout class="QHBoxLayout" name="horizontalLayout_6">
               <item>
                <widget class="QFrame" name="frame_3">
@@ -616,6 +610,12 @@ QScrollArea{
                   <horstretch>20</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>220</width>
+                  <height>0</height>
+                 </size>
                 </property>
                 <property name="frameShape">
                  <enum>QFrame::StyledPanel</enum>
@@ -682,6 +682,18 @@ font-weight: bold;</string>
                   <horstretch>25</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>170</width>
+                  <height>16777215</height>
+                 </size>
                 </property>
                 <property name="frameShape">
                  <enum>QFrame::StyledPanel</enum>

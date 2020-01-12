@@ -2,6 +2,7 @@
 #include "ui_analyticswindow.h"
 #include <QPixmap>
 #include <QVBoxLayout>
+#include <QDebug>
 
 // Constructor
 AnalyticsWindow::AnalyticsWindow(QWidget *parent) :
@@ -121,40 +122,35 @@ void AnalyticsWindow::initializeMatchHistoryTab(){
     ui->tab_lpHistory->setStyleSheet("border: 2px solid;");
 
     // Add layout to tab
-    QVBoxLayout *tabVLayout = new QVBoxLayout(ui->tab_lpHistory);
+    tabVLayout = new QVBoxLayout(ui->tab_lpHistory);
     ui->tab_lpHistory->setLayout(tabVLayout);
 
     // Add scroll area
-    QScrollArea *scrollArea = new QScrollArea(ui->tab_lpHistory);
+    scrollArea = new QScrollArea(ui->tab_lpHistory);
     tabVLayout->addWidget(scrollArea);
 
-    // Custome scroll area layout
-    QVBoxLayout *scrollVLayout = new QVBoxLayout(scrollArea);
+    // Custom scroll area layout
+    scrollVLayout = new QVBoxLayout(scrollArea);
     scrollArea->setLayout(scrollVLayout);
     scrollArea->setWidgetResizable( true );
 
     // Add wiget
-    QWidget *scrollContents = new QWidget();
+    scrollContents = new QWidget();
     scrollArea->setWidget(scrollContents);
 
     // Customize widget layout
-    QVBoxLayout *layout = new QVBoxLayout();
+    layout = new QVBoxLayout();
     scrollContents->setLayout( layout );
-
-    // Add widget to layout
-    for(int i = 0; i < 10; i ++){
-        QLabel *lbl = new QLabel(this);
-        lbl->setText("test" + QString::number(i));
-        lbl->setFixedHeight(200);
-        layout->addWidget(lbl);
-    }
-
 
 }
 
 // Slots Match History Tab: Add Match
-void AnalyticsWindow::addMatch(QString placement, QString level, QString round, QString daysAgo, QHash<QString, int> traits, QHash<QString, int> champions){
+void AnalyticsWindow::addMatch(QString placement, QString level, QString round, QString daysAgo, QList<Trait> traits, QList<Champion> champions){
 
+
+    MatchWidget *match = new MatchWidget(placement, level, round, daysAgo, traits, champions, this);
+    layout->addWidget(match);
+    qInfo() << "Added widget!";
 
 
 }

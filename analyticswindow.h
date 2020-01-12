@@ -1,6 +1,11 @@
 #pragma once
 
 #include <QDialog>
+#include <QVBoxLayout>
+#include <QScrollArea>
+#include <matchwidget.h>
+#include "trait.h"
+#include "champion.h"
 
 namespace Ui {
 class AnalyticsWindow;
@@ -48,9 +53,19 @@ public slots:
 
     // Match History
     void initializeMatchHistoryTab();
-    void addMatch(QString placement, QString level, QString round, QString daysAgo, QHash<QString, int> traits, QHash<QString, int> champions);
+    void addMatch(QString placement, QString level, QString round, QString daysAgo, QList<Trait> traits, QList<Champion> champions);
 
 
 private:
     Ui::AnalyticsWindow *ui;
+
+    // Match History Elements
+    QVBoxLayout *tabVLayout;
+
+    QScrollArea *scrollArea;
+    QVBoxLayout *scrollVLayout;
+
+    QWidget *scrollContents;
+    QVBoxLayout *layout;
+
 };

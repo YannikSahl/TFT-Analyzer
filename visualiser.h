@@ -4,6 +4,8 @@
 #include <QJsonObject>
 #include <QVector>
 #include "analyticswindow.h"
+#include "trait.h"
+#include "champion.h"
 
 class Visualiser : public QObject
 {
@@ -18,6 +20,8 @@ private:
     QJsonObject matchIDsData;
     QVector<QJsonObject> matchData;
 
+
+
 public:
     Visualiser(AnalyticsWindow *analyticsWindow_, QJsonObject summonerData_, QJsonObject rankedData_, QJsonObject matchIDsData_, QVector<QJsonObject> matchData_);
 
@@ -30,8 +34,8 @@ public:
     void fillTeamComps();
     void fillTop10();
 
-    QHash<QString, int> help_findTraitInfo(QJsonObject participantData);
-    QHash<QString, int> help_findChampionInfo(QJsonObject participantData);
+    QList<Trait> help_findTraitInfo(QJsonObject participantData);
+    QList<Champion> help_findChampionInfo(QJsonObject participantData);
 
 
 signals:

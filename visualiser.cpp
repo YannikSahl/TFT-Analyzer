@@ -175,14 +175,13 @@ void Visualiser::fillMatchHistory(){
                 qDebug().noquote() << "\t Place: " << placement << "; Level: " << level << "; Round: " << round << "; Gold: " << gold;
 
                 // Get traits with num units
-                QHash<QString, int> traits = help_findTraitInfo(participantData);
-                qDebug().noquote() << "\t Traits: " << traits;
+                QList<Trait> traits = help_findTraitInfo(participantData);
 
                 // Get champions with star
-                QHash<QString, int> champions = help_findChampionInfo(participantData);
-                qDebug().noquote() << "\t Champions: " << champions;
+                QList<Champion> champions = help_findChampionInfo(participantData);
 
                 // Display values
+                analyticsWindow->addMatch(QString::number(placement), QString::number(level), QString::number(round), daysAgo, traits, champions);
 
             }
         }
@@ -217,10 +216,10 @@ void Visualiser::fillTop10(){
 
 
 // Helper methods
-QHash<QString, int> Visualiser::help_findTraitInfo(QJsonObject participantData){
+QList<Trait> Visualiser::help_findTraitInfo(QJsonObject participantData){
 
     // Prepare return variable
-    QHash<QString, int> traits;
+    QList<Trait> traits;
 
     // Extract traits
     QJsonArray traitArray = participantData["traits"].toArray();
@@ -232,8 +231,13 @@ QHash<QString, int> Visualiser::help_findTraitInfo(QJsonObject participantData){
         QJsonObject traitData = traitArray[i].toObject();
 
         // Add to hash
-        traits[traitData["name"].toString()] = traitData["num_units"].toInt();
+        QString traitName = traitData["name"].toString();
+        int numUnits  = traitData["num_units"].toInt();
+        int tierCurrent = traitData["tier_current"].toInt();
+        int tierTotal = traitData["tier_total"].toInt();
 
+        Trait traitino(traitName, numUnits, tierCurrent, tierTotal);
+        traits.append(traitino);
     }
 
     // Return stuff
@@ -243,10 +247,10 @@ QHash<QString, int> Visualiser::help_findTraitInfo(QJsonObject participantData){
 
 
 
-QHash<QString, int> Visualiser::help_findChampionInfo(QJsonObject participantData){
+QList<Champion> Visualiser::help_findChampionInfo(QJsonObject participantData){
 
     // Prepare return variable
-    QHash<QString, int> champions;
+    QList<Champion> championInfo;
 
     // Extract traits
     QJsonArray championsArray = participantData["units"].toArray();
@@ -258,12 +262,17 @@ QHash<QString, int> Visualiser::help_findChampionInfo(QJsonObject participantDat
         QJsonObject championData = championsArray[i].toObject();
 
         // Add to hash
-        champions[championData["name"].toString()] = championData["tier"].toInt();
+        QString championName = championData["name"].toString();
+        int championTier = championData["tier"].toInt();
+        int championCost = championData["rarity"].toInt() + 1;
+
+        Champion champ(championName, championCost, championTier);
+        championInfo.append(champ);
 
     }
 
     // Return stuff
-    return champions;
+    return championInfo;
 
 }
 

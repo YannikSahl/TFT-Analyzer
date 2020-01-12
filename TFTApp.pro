@@ -19,17 +19,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     analyticswindow.cpp \
+    champion.cpp \
     datainquirer.cpp \
     main.cpp \
     mainwindow.cpp \
+    matchwidget.cpp \
     requesthandler.cpp \
+    trait.cpp \
     visualiser.cpp
 
 HEADERS += \
     analyticswindow.h \
+    champion.h \
     datainquirer.h \
     mainwindow.h \
+    matchwidget.h \
     requesthandler.h \
+    trait.h \
     visualiser.h
 
 FORMS += \
