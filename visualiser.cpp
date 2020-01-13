@@ -1,6 +1,7 @@
 #include "visualiser.h"
 #include "analyticswindow.h"
 #include "datainquirer.h"
+#include "compwidget.h"
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QDebug>
@@ -33,9 +34,6 @@ void Visualiser::fillGUI(){
 
     // Fill Match History Tab
     fillMatchHistory();
-
-    // Fills LP History Tab
-    fillLPHistory();
 
     // Fills Team Comps Tab
     fillTeamComps();
@@ -97,9 +95,7 @@ void Visualiser::fillOverview(){
     QString winrateString = QString::number(winrate);
     analyticsWindow->setLabel_WinRateDesc(winrateString);
 
-    // Average Place
-    QString placement = "3.7";
-    analyticsWindow->setLabel_AveragePlacements(placement);
+    // Average Place: Handled by fillMatchHistory
 
 }
 
@@ -138,20 +134,28 @@ void Visualiser::fillStatistics(){
 void Visualiser::fillMatchHistory(){
 
     // Calculate average placement
-    double placementAverage = 0;
+    double placementAverage = 0, placementAverageMirror = 0;
+    int minDaysAgo = 80000, maxDaysAgo = 0;
 
     // Prepare statistics recent placement string
     QString recentPlacements;
+    QVector< QVector <int> > placements;
 
     // Iterate over Matches
-    for(QJsonObject match : matchData){
+    for(int i = 0; i < matchData.size(); i++){
+
+        QJsonObject match = matchData[i];
 
         // Get "info" data
         QJsonObject infoData = match["info"].toObject();
         uint64_t gameTime = (uint64_t)infoData["game_datetime"].toDouble();
         uint64_t now = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
-        double diffInDays = round((double)(now - gameTime)/1000/60/60/24);
+        int diffInDays = round((double)(now - gameTime)/1000/60/60/24);
         QString daysAgo = QString::number(diffInDays);
+
+        // Calculate max, min diffInDays
+        if(diffInDays > maxDaysAgo) { maxDaysAgo = diffInDays; }
+        if(diffInDays < minDaysAgo) { minDaysAgo = diffInDays; }
 
         // Get metadata to print match_id
         QJsonObject metaData = match["metadata"].toObject();
@@ -162,33 +166,46 @@ void Visualiser::fillMatchHistory(){
         QJsonArray participantsArray = infoData["participants"].toArray();
 
         // Iterate over participantsArray
-        for(int i = 0; i < participantsArray.size(); i++){
+        for(int j = 0; j < participantsArray.size(); j++){
 
             // Get single participant info
-            QJsonObject participantData = participantsArray[i].toObject();
+            QJsonObject participantData = participantsArray[j].toObject();
 
             // Get Info belonging to PUUID
             if (participantData["puuid"] == summonerData["puuid"]){
 
                 // Get meta data
                 int placement = participantData["placement"].toInt();
-                int gold = participantData["gold_left"].toInt();
                 int level = participantData["level"].toInt();
                 int round = participantData["last_round"].toInt(); 
 
                 // Add to recentPlacements
-                if(recentPlacements.length() < 30){
+                if(recentPlacements.length() < 15){
                     recentPlacements += QString::number(placement) + ", ";
                 }
 
                 // Add to average
                 placementAverage += placement;
 
-                // Get traits with num units
+                // Store for later use in placement history
+                QVector<int> singlePlacement;
+                singlePlacement.append(diffInDays);
+                singlePlacement.append(placement);
+                placements.append(singlePlacement);
+
+                // Get traits with num units, sort and append to list
                 QList<Trait> traits = help_findTraitInfo(participantData);
+                qSort(traits.begin(), traits.end());
+
+                // Store
+                struct TraitData singletrait{traits, placement};
+                allTraits.append(singletrait);
 
                 // Get champions with star
                 QList<Champion> champions = help_findChampionInfo(participantData);
+
+                // Sort champions by cost
+                qSort(champions.begin(), champions.end());
 
                 // Display values
                 analyticsWindow->addMatch(QString::number(placement), QString::number(level), QString::number(round), daysAgo, traits, champions);
@@ -197,21 +214,18 @@ void Visualiser::fillMatchHistory(){
         }
     }
 
-    // Show average
-    placementAverage /= (double) matchData.length();
+    // Overview Tab: Display average
+    placementAverage = roundf(100*(placementAverage / (double) matchData.length()))/100;
     analyticsWindow->setLabel_AveragePlacements(QString::number(placementAverage));
 
-    // Show recent placements
+    // Statistics Tab: Display Recent placements
     qInfo() << "Davor: " << recentPlacements;
     recentPlacements = recentPlacements.left(recentPlacements.size()-2);
     qInfo() << "Danach: " << recentPlacements;
     analyticsWindow->setLabel_Placements(recentPlacements);
-}
 
-
-
-// Fills LP History Tab
-void Visualiser::fillLPHistory(){
+    // Placement History Tab: Display chart
+    analyticsWindow->fillPlacementHistoryTab(placements, maxDaysAgo, minDaysAgo);
 
 }
 
@@ -219,6 +233,87 @@ void Visualiser::fillLPHistory(){
 
 // Fills Team Comps Tab
 void Visualiser::fillTeamComps(){
+
+    // Prepare hash
+    QHash<QString, TraitInfo> compCounts;
+
+    // Find most common team comps
+    for(TraitData traitData : allTraits){
+
+        // Extract info
+        QList<Trait> traits = traitData.traits;
+        int placement = traitData.placement;
+
+        // Add two most played traits
+        QString trait1 = traits[traits.size()-1].traitName;
+        QString trait2 = traits[traits.size()-2].traitName;
+
+        // Form QString
+        QString traitComb = trait1 + " + " + trait2;
+        QString traitComb2 = trait2 + " + " + trait1;
+
+        // Add to hash
+        if(compCounts.contains(traitComb)){
+            TraitInfo t = compCounts[traitComb];
+            t.occurences += 1;
+            t.combinedRating += placement;
+            compCounts[traitComb] = t;
+        }
+        else if (compCounts.contains(traitComb2)){
+            TraitInfo t = compCounts[traitComb2];
+            t.occurences += 1;
+            t.combinedRating += placement;
+            compCounts[traitComb2] = t;
+        }
+        else{
+            struct TraitInfo t{1, placement};
+            compCounts.insert(traitComb, t);
+        }
+    }
+
+    // Forward top 5
+    int compsSize = compCounts.size();
+    int allPlays = 0;
+    for(int i = 0; i < 5 && i < compsSize; i++){
+
+        QHashIterator<QString, TraitInfo> iter(compCounts);
+
+        // Comp values
+        int compPlays = 0;
+        QString compName = "";
+        int compRating = 0;
+
+        // Iterate over all traits
+        while(iter.hasNext())
+        {
+            iter.next();
+
+            // Find highest comp
+            QString name = iter.key();
+            int plays = iter.value().occurences;
+            int rating = iter.value().combinedRating;
+
+            if(i == 0) allPlays += plays;
+
+            if(plays > compPlays){
+                compPlays = plays;
+                compName = name;
+                compRating = rating;
+            }
+        }
+
+        // Show comp and remove
+        analyticsWindow->addComp(i+1, compName, (double)compPlays/allPlays, (double)compRating/compPlays);
+        compCounts.remove(compName);
+
+        // Fill overview tab
+        if(i == 0) analyticsWindow->setLabel_FavoriteComp(compName);
+        if(i == 1) analyticsWindow->setLabel_FavoriteComp2(compName);
+
+        // Reset iterator
+        iter.toFront();
+    }
+
 
 }
 
@@ -255,6 +350,9 @@ QList<Trait> Visualiser::help_findTraitInfo(QJsonObject participantData){
         int numUnits  = traitData["num_units"].toInt();
         int tierCurrent = traitData["tier_current"].toInt();
         int tierTotal = traitData["tier_total"].toInt();
+
+        // Fix name "SET2_"
+        if(traitName.contains("_")){ traitName = traitName.mid(5);}
 
         Trait traitino(traitName, numUnits, tierCurrent, tierTotal);
         traits.append(traitino);

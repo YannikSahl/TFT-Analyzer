@@ -78,7 +78,7 @@ QTabBar::tab:selected {
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -131,7 +131,8 @@ QTabBar::tab:selected {
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">border: 2px solid;</string>
+          <string notr="true">border: 2px solid;
+border-color: rgb(219, 189, 128);</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -344,7 +345,7 @@ font-size: 40px;</string>
 
 
 QGroupBox {
-	border: 2px solid;
+	border: 0;
 	padding: 10px;
 	margin: 2px;
 	font-weight: bold;
@@ -362,6 +363,11 @@ QWidget {
       <layout class="QGridLayout" name="gridLayout_7">
        <item row="0" column="1">
         <widget class="QGroupBox" name="box_summonerData">
+         <property name="styleSheet">
+          <string notr="true">QGroupBox{
+border-bottom: 2px solid rgb(219, 189, 128);
+}</string>
+         </property>
          <property name="title">
           <string>Summoner</string>
          </property>
@@ -437,7 +443,9 @@ QWidget {
        <item row="0" column="0" rowspan="2">
         <widget class="QGroupBox" name="box_rankedData">
          <property name="styleSheet">
-          <string notr="true"/>
+          <string notr="true">QGroupBox{
+border-right: 2px solid rgb(219, 189, 128);
+}</string>
          </property>
          <property name="title">
           <string>Ranked (Season 2)</string>
@@ -552,23 +560,44 @@ QWidget {
        <string>Match History</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="tab_lpHistory">
+     <widget class="QWidget" name="tab_rankings">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <attribute name="title">
-       <string>Av. Placement</string>
+       <string>Rankings</string>
       </attribute>
      </widget>
      <widget class="QWidget" name="tab_teamComps">
       <property name="styleSheet">
-       <string notr="true">border: 2px solid;</string>
+       <string notr="true">padding: 5px;</string>
       </property>
       <attribute name="title">
        <string>Team Comps</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QFrame" name="frame_12">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>80</height>
+          </size>
+         </property>
          <property name="styleSheet">
-          <string notr="true">text-decoration: underline;</string>
+          <string notr="true">*{
+	font-weight: bold;
+}
+
+.QFrame{
+border-bottom: 2px solid rgb(219, 189, 128);
+}</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -578,12 +607,31 @@ QWidget {
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
+           <widget class="QLabel" name="label_5">
+            <property name="minimumSize">
+             <size>
+              <width>80</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Place</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="label">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>80</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>635</width>
+              <height>0</height>
+             </size>
             </property>
             <property name="text">
              <string>Team Composition</string>
@@ -597,6 +645,12 @@ QWidget {
               <horstretch>10</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>130</width>
+              <height>0</height>
+             </size>
             </property>
             <property name="text">
              <string>Play Rate</string>
@@ -614,80 +668,14 @@ QWidget {
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="text">
-             <string>Placement</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frame_14">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>120</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>120</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">/*text-decoration: underline;</string>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_10">
-          <item>
-           <widget class="QLabel" name="label_28">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>80</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+            <property name="minimumSize">
+             <size>
+              <width>130</width>
+              <height>0</height>
+             </size>
             </property>
             <property name="text">
-             <string>6 Blademaster, 4 Assassin, 3 Steel</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_29">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>10</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>20%</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_30">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>10</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>42%</string>
+             <string>Average #</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>

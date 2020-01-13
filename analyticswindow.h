@@ -6,6 +6,8 @@
 #include <matchwidget.h>
 #include "trait.h"
 #include "champion.h"
+#include <QtCharts/QScatterSeries>
+#include <QtCharts/QLineSeries>
 
 namespace Ui {
 class AnalyticsWindow;
@@ -51,9 +53,15 @@ public slots:
     void setLabel_FavoriteComp(QString comp);
     void setLabel_FavoriteComp2(QString comp);
 
-    // Match History
+    // Match History Tab
     void initializeMatchHistoryTab();
     void addMatch(QString placement, QString level, QString round, QString daysAgo, QList<Trait> traits, QList<Champion> champions);
+
+    // Placement History Tab
+    void fillPlacementHistoryTab(QVector< QVector<int> > placements, int maxDaysAgo, int minDaysAgo);
+
+    // Team Comp Tab
+    void addComp(int place, QString teamComp, double playRate, double winRate);
 
 
 private slots:
@@ -71,5 +79,8 @@ private:
 
     QWidget *scrollContents;
     QVBoxLayout *layout;
+
+    // Placement History Elements
+    QVBoxLayout *tabVLayout2;
 
 };

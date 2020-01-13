@@ -63,21 +63,21 @@ void MatchWidget::initialize(){
     // Set sizes main container
     frameGameInfo->setFixedWidth(220);
     frameCompInfo->setFixedWidth(170);
+    frameTeamInfo->setFixedHeight(90);
 
     // Set sizes sub container
-    frameTeamInfo_champions->setFixedHeight(80);
-    frameTeamInfo_championsLevel->setFixedHeight(30);
+    frameTeamInfo_champions->setFixedHeight(50);
+    frameTeamInfo_championsLevel->setFixedHeight(20);
 
     // Set alignment sub container layouts
     frameTeamInfo_champions_layout->setAlignment(Qt::AlignLeft);
     frameTeamInfo_championsLevel_layout->setAlignment(Qt::AlignLeft);
 
     // Set padding, margin for frameTeamInfo
-    frameTeamInfo->setStyleSheet("*{"
-                                 "margin: 0px;"
-                                 "padding: 0px;"
-                                 "}"
-                                 );
+    frameTeamInfo_layout->setContentsMargins(0, 0, 0, 0);
+    frameTeamInfo_layout->setMargin(10);
+    frameTeamInfo_champions_layout->setContentsMargins(0, 0, 0, 0);
+    frameTeamInfo_championsLevel_layout->setContentsMargins(0, 0, 0, 0);
 
     frameGameInfo->setStyleSheet(".QFrame{"
                                  "border-right: 2px solid;"
@@ -111,8 +111,6 @@ void MatchWidget::customize(QString placement, QString level, QString round, QSt
                                   "font-weight: bold;"
                                   );
 
-    // Sort traits by numunits
-    qSort(traits.begin(), traits.end());
 
     // Temp counter
     int counter = 0;
@@ -126,7 +124,6 @@ void MatchWidget::customize(QString placement, QString level, QString round, QSt
         QString unitsTrait = QString::number(trait.numUnits);
         QString nameTrait = trait.traitName;
         int currentTierTrait = trait.tierCurrent;
-        if(nameTrait.contains("_")){ nameTrait = nameTrait.mid(5);}
 
         // Only if first buff is reached
         if(currentTierTrait>0){
@@ -136,9 +133,6 @@ void MatchWidget::customize(QString placement, QString level, QString round, QSt
             counter++;
         }
     }
-
-    // Sort champions by cost
-    qSort(champions.begin(), champions.end());
 
     // Add labels to frameTeamInfo
     for(int i = 0; i < champions.size(); i++){

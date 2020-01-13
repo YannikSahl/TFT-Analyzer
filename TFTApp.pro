@@ -1,4 +1,4 @@
-QT       += core gui network
+QT       += core gui network charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,10 +20,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     analyticswindow.cpp \
     champion.cpp \
+    compwidget.cpp \
     datainquirer.cpp \
     main.cpp \
     mainwindow.cpp \
     matchwidget.cpp \
+    placementchart.cpp \
     requesthandler.cpp \
     trait.cpp \
     visualiser.cpp
@@ -31,9 +33,11 @@ SOURCES += \
 HEADERS += \
     analyticswindow.h \
     champion.h \
+    compwidget.h \
     datainquirer.h \
     mainwindow.h \
     matchwidget.h \
+    placementchart.h \
     requesthandler.h \
     trait.h \
     visualiser.h

@@ -69,8 +69,8 @@ color: rgb(207, 168, 85);
 }</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="2">
-     <spacer name="horizontalSpacer_4">
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -79,7 +79,7 @@ color: rgb(207, 168, 85);
       </property>
       <property name="sizeHint" stdset="0">
        <size>
-        <width>10</width>
+        <width>40</width>
         <height>20</height>
        </size>
       </property>
@@ -136,8 +136,8 @@ QPushButton::pressed{
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
-     <spacer name="horizontalSpacer">
+    <item row="1" column="2">
+     <spacer name="horizontalSpacer_4">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -146,118 +146,11 @@ QPushButton::pressed{
       </property>
       <property name="sizeHint" stdset="0">
        <size>
-        <width>40</width>
+        <width>10</width>
         <height>20</height>
        </size>
       </property>
      </spacer>
-    </item>
-    <item row="1" column="3">
-     <widget class="QComboBox" name="regionChooserBox">
-      <property name="minimumSize">
-       <size>
-        <width>70</width>
-        <height>30</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>70</width>
-        <height>30</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <family>MS Sans Serif</family>
-        <pointsize>12</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="contextMenuPolicy">
-       <enum>Qt::NoContextMenu</enum>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QComboBox{
-	border: 2px solid;
-	border-color: rgb(207, 168, 85);
-	border-radius: 15px;
-
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-QComboBox::hover{
-	background-color: rgb(207, 168, 85);
-	color: black;
-}
-
-QComboBox::drop-down {
-	width: 0px;
-	color: rgb(255, 170, 0);	
-}
-</string>
-      </property>
-      <property name="currentText">
-       <string>EUW</string>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>0</width>
-        <height>0</height>
-       </size>
-      </property>
-      <item>
-       <property name="text">
-        <string>BR</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>EUN</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>EUW</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>JP</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>KR</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>LA</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>NA</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>RU</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>OC</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>TR</string>
-       </property>
-      </item>
-     </widget>
     </item>
     <item row="1" column="1">
      <widget class="QLineEdit" name="summonerNameLine">
@@ -348,6 +241,113 @@ border-color: rgb(255, 170, 0);</string>
        </size>
       </property>
      </spacer>
+    </item>
+    <item row="1" column="3">
+     <widget class="QComboBox" name="regionChooserBox">
+      <property name="minimumSize">
+       <size>
+        <width>70</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>70</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>MS Sans Serif</family>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::NoContextMenu</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QComboBox{
+	border: 2px solid;
+	border-color: rgb(207, 168, 85);
+	border-radius: 15px;
+
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+QComboBox::hover{
+	background-color: rgb(207, 168, 85);
+	color: black;
+}
+
+QComboBox::drop-down {
+	width: 0px;
+	color: rgb(255, 170, 0);	
+}
+</string>
+      </property>
+      <property name="currentText">
+       <string>BR</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>BR</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EUN</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>EUW</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>JP</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>KR</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>NA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RU</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>OC</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>TR</string>
+       </property>
+      </item>
+     </widget>
     </item>
    </layout>
   </widget>

@@ -1,9 +1,11 @@
 #include "analyticswindow.h"
 #include "ui_analyticswindow.h"
+#include "compwidget.h"
 #include <QPixmap>
 #include <QVBoxLayout>
 #include <QDebug>
 #include <QScrollBar>
+#include "placementchart.h"
 
 // Constructor
 AnalyticsWindow::AnalyticsWindow(QWidget *parent) :
@@ -116,6 +118,68 @@ void AnalyticsWindow::setLabel_FavoriteComp2(QString comp){
 }
 
 
+// Slots Placement History Tab: Initialize Tab
+void AnalyticsWindow::fillPlacementHistoryTab(QVector< QVector<int> > placements, int maxDaysAgo, int minDaysAgo){
+
+    // Add layout to tab
+    tabVLayout2 = new QVBoxLayout(ui->tab_rankings);
+    ui->tab_rankings->setLayout(tabVLayout2);
+
+    // Make series
+    QScatterSeries *placementsSeries = new QScatterSeries();
+    QLineSeries *placementAveragesSeries = new QSplineSeries();
+
+    // Add to average series for Placement History tab
+    int counter = 0, lastDaysAgo = 0;
+    double placementSum = 0, averagePlacement = 0;
+    for(int i = placements.size()-1; i >=0; i--){
+
+        // Single placement
+        QVector<int> placement = placements[i];
+        int daysAgo = -placement[0];
+        int place = placement[1];
+
+        // Mirror place
+        place = place + 2 * (4.5-place);
+
+        // Store single placement (days ago, place)
+        placementsSeries->append(daysAgo, place);
+
+        // On every change store last (never on first)
+        if((!(lastDaysAgo == daysAgo) && lastDaysAgo != 0)){
+
+            // Store placement average
+            averagePlacement = placementSum/counter;
+            placementAveragesSeries->append(lastDaysAgo, placementSum/counter);
+
+            qInfo() << "Current average: " << averagePlacement;
+
+        }
+        // Always on last
+        if(i == 0){
+            // Store placement average
+            averagePlacement = (placementSum+place)/(counter+1);
+            placementAveragesSeries->append(daysAgo, (placementSum+place)/(counter+1));
+            qInfo() << "Last average: " << averagePlacement;
+        }
+
+        // Placement average
+        placementSum += place;
+
+        // Next i
+        lastDaysAgo = daysAgo;
+        counter++;
+    }
+
+    // Create graph
+    PlacementChart *pChart = new PlacementChart(placementsSeries, placementAveragesSeries, maxDaysAgo, minDaysAgo);
+
+    // Add to layout
+    tabVLayout2->addWidget(pChart->chartView);
+
+}
+
+
 // Slots Match History Tab: Initialize Tab
 void AnalyticsWindow::initializeMatchHistoryTab(){
 
@@ -135,13 +199,13 @@ void AnalyticsWindow::initializeMatchHistoryTab(){
     scrollArea->setWidgetResizable( true );
 
     // Add wiget
-    scrollContents = new QWidget();
+    scrollContents = new QWidget(scrollArea);
     scrollArea->setWidget(scrollContents);
 
     // Customize widget layout
     layout = new QVBoxLayout();
-    scrollContents->setLayout( layout );
 
+    scrollContents->setLayout( layout );
     // Set margin, padding
     scrollArea->setStyleSheet("QScrollArea > QWidget{margin: 0px;}"
                               "QScrollArea{border: 0;}");
@@ -155,15 +219,28 @@ void AnalyticsWindow::addMatch(QString placement, QString level, QString round, 
     MatchWidget *match = new MatchWidget(placement, level, round, daysAgo, traits, champions, this);
     layout->addWidget(match);
 
-    /*
-    // Add spacer
-    QFrame *spacerFrame = new QFrame(this);
-    spacerFrame->setFixedHeight(4);
-    layout->addWidget(spacerFrame);
-    */
+    // Spacer
+    QWidget *spacer = new QWidget(scrollContents);
+    spacer->setStyleSheet(""
+                          "border: 1px solid rgb(219, 189, 128);"
+                          "margin: 10px;"
+                          );
+    spacer->setFixedHeight(20);
+    spacer->setFixedWidth(780);
+    layout->addWidget(spacer);
+    layout->setAlignment(spacer, Qt::AlignHCenter);
 
-    qInfo() << "Added widget!";
+}
 
+// Slots Comp Tab: Add Team Comp
+void AnalyticsWindow::addComp(int place, QString teamComp, double playRate, double winRate){
+
+
+    // Create object
+    CompWidget *cWidget = new CompWidget(place, teamComp, playRate, winRate, this);
+
+    // Add to layout
+    ui->tab_teamComps->layout()->addWidget(cWidget);
 
 }
 

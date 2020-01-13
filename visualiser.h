@@ -13,12 +13,25 @@ class Visualiser : public QObject
 
 private:
 
+    struct TraitData{
+        QList<Trait> traits;
+        int placement;
+    };
+    struct TraitInfo{
+        int occurences;
+        int combinedRating;
+    };
+
     AnalyticsWindow *analyticsWindow;
 
     QJsonObject summonerData;
     QJsonObject rankedData;
     QJsonObject matchIDsData;
     QVector<QJsonObject> matchData;
+
+    QList< TraitData > allTraits;
+
+
 
 
 
