@@ -23,6 +23,9 @@ AnalyticsWindow::AnalyticsWindow(QWidget *parent) :
     // Set Fixed Size
     this->setFixedSize(this->size());
 
+    // Set Window Title
+    this->setWindowTitle("TFT Analysis: " + ui->label_overview_summonerName->text());
+
     // Initialize Match History Tab
     initializeMatchHistoryTab();
 
@@ -248,7 +251,17 @@ void AnalyticsWindow::addComp(int place, QString teamComp, double playRate, doub
 // Scroll to top on click
 void AnalyticsWindow::on_tabWidget_tabBarClicked(int index)
 {
-    // If Match History is chosen
+
+    // If Top 10 is chosen
+    if(index == 5){
+
+    }
+
+}
+
+void AnalyticsWindow::on_tabWidget_tabBarDoubleClicked(int index)
+{
+    // If Match History is double clicked
     if(index == 2){
         QScrollBar *vScrollBar = scrollArea->verticalScrollBar();
         vScrollBar->triggerAction(QScrollBar::SliderToMinimum);

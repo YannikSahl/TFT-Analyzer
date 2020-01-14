@@ -68,6 +68,8 @@ private slots:
 
     void on_tabWidget_tabBarClicked(int index);
 
+    void on_tabWidget_tabBarDoubleClicked(int index);
+
 private:
     Ui::AnalyticsWindow *ui;
 

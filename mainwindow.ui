@@ -109,8 +109,9 @@ color: rgb(207, 168, 85);
        <font>
         <family>MS Sans Serif</family>
         <pointsize>12</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
+        <weight>50</weight>
+        <bold>false</bold>
+        <kerning>true</kerning>
        </font>
       </property>
       <property name="cursor">
