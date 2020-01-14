@@ -23,6 +23,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     sp_retain.setRetainSizeWhenHidden(true);
     ui->searchButton->setSizePolicy(sp_retain);
 
+    // Setup settings
+    settingsDialog = new SettingsDialog(this);
+
     // Temp
     ui->summonerNameLine->setText("Alvarny");
     ui->regionChooserBox->setCurrentText("EUW");
@@ -47,9 +50,16 @@ void MainWindow::on_searchButton_released()
     QString summonerName = ui->summonerNameLine->text();
     QString region = ui->regionChooserBox->currentText();
 
+    // Read settings
+    int matchCount = settingsDialog->matches;
+
     // Create RequestHandler and AnalyticsWindow objects
     analyticsWindow = new AnalyticsWindow(this);
-    RequestHandler *requestHandler = new RequestHandler(analyticsWindow, apiKey, summonerName, region);
+    requestHandler = new RequestHandler(analyticsWindow, apiKey, summonerName, region, matchCount);
+
+    // Connect this and requesthandler for status updates
+    connect(requestHandler, SIGNAL(analysisStatusChanged(QString)), this, SLOT(setAnalysisStatus(QString)));
+
 
     // If no Errors are returned
     if(requestHandler->handleRequest() == 1){
@@ -150,4 +160,19 @@ void MainWindow::hideLoadingSymbol(QLabel *lbl){
     ui->searchButton->show();
     lbl->hide();
 
+}
+
+
+// Evoke settings window
+void MainWindow::on_settingsButton_clicked()
+{
+
+    settingsDialog->show();
+}
+
+
+// Slots: Set analysis status
+void MainWindow::setAnalysisStatus(QString status){
+    qInfo() << "Invoked";
+    ui->label_statusMatches->setText(status);
 }

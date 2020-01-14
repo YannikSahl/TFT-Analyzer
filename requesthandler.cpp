@@ -8,13 +8,15 @@
 
 
 // Constructor
-RequestHandler::RequestHandler(AnalyticsWindow *analyticsWindow_, QString apiKey_, QString summonerName_, QString region_)
+RequestHandler::RequestHandler(AnalyticsWindow *analyticsWindow_, QString apiKey_, QString summonerName_, QString region_, int matchCount_)
 {
     analyticsWindow = analyticsWindow_;
     apiKey = apiKey_;
     summonerName = summonerName_;
     region = region_;
+    matchCount = matchCount_;
 
+    emit analysisStatusChanged("test");
     qInfo() << "Created RequestHandler object with apiKey:'" + apiKey_ + "' and summonerName:'" + summonerName;
 }
 
@@ -43,13 +45,16 @@ int RequestHandler::handleRequest(){
         return 3;
     }
     QJsonArray matchIds = matchIDsData["matches"].toArray();
-    int maxMatches = matchIds.size() < 5 ? matchIds.size() : 5;
+    int maxMatches = matchIds.size() < matchCount ? matchIds.size() : matchCount;
 
     for(int i = 0; i < maxMatches; i++){
 
         // Get Single Match Id
         QString matchIdString = matchIds[i].toString();
+
+        // Emit signal current status
         qInfo() << "i: " << i << " with matchId " << matchIdString;
+        emit analysisStatusChanged("Status: " + QString::number(i+1) + " of " + QString::number(maxMatches) + " Matches");
 
         // Query Match Info for That Match (in separate Thread)
         queryMatchInfo(matchIdString);
@@ -76,6 +81,9 @@ int RequestHandler::handleRequest(){
 // Gets Information about the Summoner Name
 QJsonObject RequestHandler::querySummonerInfo(QString summonerName){
 
+    // Status
+    emit analysisStatusChanged("Querying Summoner Data");
+
     // Build URL
     QString regionFormat = determineRegion(0);
     queryString = "https://" + regionFormat + ".api.riotgames.com/tft/summoner/v1/summoners/by-name/" + summonerName + "?api_key=" + apiKey;
@@ -92,6 +100,9 @@ QJsonObject RequestHandler::querySummonerInfo(QString summonerName){
 
 // Gets Information about the Ranked Status
 QJsonObject RequestHandler::queryRankedInfo(QString summonerId){
+
+    // Status
+    emit analysisStatusChanged("Querying Ranked Data");
 
     // Build URL
     QString regionFormat = determineRegion(0);
@@ -110,6 +121,9 @@ QJsonObject RequestHandler::queryRankedInfo(QString summonerId){
 
 // Gets all the Match IDs belonging to a specific PUUID
 QJsonObject RequestHandler::queryMatchIDs(QString puuId){
+
+    // Status
+    emit analysisStatusChanged("Querying Match Data");
 
     // Build URL
     QString regionFormat = determineRegion(1);

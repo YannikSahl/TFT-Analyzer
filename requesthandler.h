@@ -19,6 +19,7 @@ private:
     QString apiKey;
     QString summonerName;
     QString region;
+    int matchCount;
 
     QString queryString;
     QUrl queryUrl;
@@ -29,7 +30,7 @@ private:
 
 public:
 
-    RequestHandler(AnalyticsWindow *analyticsWindow, QString apiKey_, QString summonerName_, QString region_);
+    RequestHandler(AnalyticsWindow *analyticsWindow, QString apiKey_, QString summonerName_, QString region_, int matchCount_);
     int handleRequest();
 
     QString determineRegion(bool regionFormat);
@@ -40,6 +41,7 @@ public:
     QJsonObject queryMatchInfo(QString matchId);
 
 signals:
+    void analysisStatusChanged(QString newStatus);
 
 };
 

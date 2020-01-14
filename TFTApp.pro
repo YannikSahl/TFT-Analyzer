@@ -27,6 +27,7 @@ SOURCES += \
     matchwidget.cpp \
     placementchart.cpp \
     requesthandler.cpp \
+    settingsdialog.cpp \
     trait.cpp \
     visualiser.cpp
 
@@ -39,12 +40,14 @@ HEADERS += \
     matchwidget.h \
     placementchart.h \
     requesthandler.h \
+    settingsdialog.h \
     trait.h \
     visualiser.h
 
 FORMS += \
     analyticswindow.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    settingsdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
