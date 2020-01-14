@@ -17,6 +17,7 @@ public:
     ~SettingsDialog();
 
     int matches;
+    QString apiKey;
 
 private slots:
 

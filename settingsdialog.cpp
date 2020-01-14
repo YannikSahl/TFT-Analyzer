@@ -8,6 +8,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     matches = ui->matchesLine->text().toInt();
+    apiKey = ui->apiKeyLine->text();
 }
 
 SettingsDialog::~SettingsDialog()
@@ -19,4 +20,5 @@ SettingsDialog::~SettingsDialog()
 void SettingsDialog::on_buttonBox_accepted()
 {
     matches = ui->matchesLine->text().toInt();
+    apiKey = ui->apiKeyLine->text();
 }

@@ -28,6 +28,7 @@ SOURCES += \
     placementchart.cpp \
     requesthandler.cpp \
     settingsdialog.cpp \
+    topteamfinder.cpp \
     trait.cpp \
     visualiser.cpp
 
@@ -41,6 +42,7 @@ HEADERS += \
     placementchart.h \
     requesthandler.h \
     settingsdialog.h \
+    topteamfinder.h \
     trait.h \
     visualiser.h
 

@@ -46,7 +46,7 @@ void MainWindow::on_searchButton_released()
     showLoadingSymbol(loadingLabel);
 
     // Read User Input
-    QString apiKey = "RGAPI-18c42e27-32ab-4669-827d-573ec7d7fa95";
+    QString apiKey = settingsDialog->apiKey;
     QString summonerName = ui->summonerNameLine->text();
     QString region = ui->regionChooserBox->currentText();
 
@@ -81,6 +81,7 @@ void MainWindow::on_searchButton_released()
 
     // Show search button again
     hideLoadingSymbol(loadingLabel);
+    setAnalysisStatus("");
 
 }
 

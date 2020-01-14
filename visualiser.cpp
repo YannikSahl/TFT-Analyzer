@@ -39,7 +39,7 @@ void Visualiser::fillGUI(){
     fillTeamComps();
 
     // Fills Top 10 Tab
-    fillTop10();
+    fillTopTeams();
 
 }
 
@@ -320,7 +320,15 @@ void Visualiser::fillTeamComps(){
 
 
 // Fills Top 10 Tab
-void Visualiser::fillTop10(){
+void Visualiser::fillTopTeams(){
+
+    // Get top 8 summoner
+
+
+    // Get 10 matches per summoner
+
+
+    //
 
 }
 

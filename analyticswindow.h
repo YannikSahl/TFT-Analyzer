@@ -66,8 +66,10 @@ public slots:
 
 private slots:
 
+    // Tab Bar: Single click
     void on_tabWidget_tabBarClicked(int index);
 
+    // Tab Bar: Double Click
     void on_tabWidget_tabBarDoubleClicked(int index);
 
 private:

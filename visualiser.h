@@ -45,7 +45,7 @@ public:
     void fillMatchHistory();
     void fillLPHistory();
     void fillTeamComps();
-    void fillTop10();
+    void fillTopTeams();
 
     QList<Trait> help_findTraitInfo(QJsonObject participantData);
     QList<Champion> help_findChampionInfo(QJsonObject participantData);
