@@ -54,7 +54,7 @@ int RequestHandler::handleRequest(){
 
         // Emit signal current status
         qInfo() << "i: " << i << " with matchId " << matchIdString;
-        emit analysisStatusChanged("Status: " + QString::number(i+1) + " of " + QString::number(maxMatches) + " Matches");
+        emit analysisStatusChanged("Querying Match " + QString::number(i+1) + " of " + QString::number(maxMatches));
 
         // Query Match Info for That Match (in separate Thread)
         queryMatchInfo(matchIdString);
@@ -70,6 +70,9 @@ int RequestHandler::handleRequest(){
 
     // Wait for all responses
     while(matchData.size() != maxMatches){}
+
+    // Update status
+    emit analysisStatusChanged("Processing Matches");
 
     // Forward Data for Visualisation
     Visualiser *visual = new Visualiser(analyticsWindow, summonerData, rankedData, matchIDsData, matchData);
