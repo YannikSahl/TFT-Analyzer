@@ -154,7 +154,6 @@ void Visualiser::fillMatchHistory(){
         // Get metadata to print match_id
         QJsonObject metaData = match["metadata"].toObject();
         QString matchId = metaData["match_id"].toString();
-        qDebug().noquote() << "Match: " << matchId;
 
         // Get "participants" from "info"
         QJsonArray participantsArray = infoData["participants"].toArray();
@@ -213,9 +212,7 @@ void Visualiser::fillMatchHistory(){
     analyticsWindow->setLabel_AveragePlacements(QString::number(placementAverage));
 
     // Statistics Tab: Display Recent placements
-    qInfo() << "Davor: " << recentPlacements;
     recentPlacements = recentPlacements.left(recentPlacements.size()-2);
-    qInfo() << "Danach: " << recentPlacements;
     analyticsWindow->setLabel_Placements(recentPlacements);
 
     // Placement History Tab: Display chart

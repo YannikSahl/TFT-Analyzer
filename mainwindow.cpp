@@ -173,6 +173,5 @@ void MainWindow::on_settingsButton_clicked()
 
 // Slots: Set analysis status
 void MainWindow::setAnalysisStatus(QString status){
-    qInfo() << "Invoked";
     ui->label_statusMatches->setText(status);
 }

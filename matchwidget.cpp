@@ -156,7 +156,6 @@ void MatchWidget::customize(QString placement, QString level, QString round, QSt
         QPixmap championIcon(":/include/champions/" + championName + ".jpg");
         labelChamp->setPixmap(championIcon);
         labelChamp->setScaledContents(true);
-        qInfo() << "Champ name: " << championName << "; Pixmap: " << championIcon.size();
 
         if(championTier == "1"){labelChamp_rank->setText("*");}
         if(championTier == "2"){labelChamp_rank->setText("**");}

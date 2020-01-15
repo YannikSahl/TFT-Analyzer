@@ -27,12 +27,14 @@ private:
 
     QVector<QJsonObject> matchData;
 
+private slots:
+    void handleTopRequest();
+
 
 public:
 
     RequestHandler(AnalyticsWindow *analyticsWindow, QString apiKey_, QString summonerName_, QString region_, int matchCount_);
     int handleRequest();
-    int handleTopRequest();
 
     QString determineRegion(bool regionFormat);
 
@@ -47,6 +49,7 @@ public:
 
 signals:
     void analysisStatusChanged(QString newStatus);
+
 
 };
 

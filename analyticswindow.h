@@ -87,4 +87,7 @@ private:
     // Placement History Elements
     QVBoxLayout *tabVLayout2;
 
+signals:
+    void topTeamsRequested();
+
 };

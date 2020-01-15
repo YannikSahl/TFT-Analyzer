@@ -155,15 +155,12 @@ void AnalyticsWindow::fillPlacementHistoryTab(QVector< QVector<int> > placements
             averagePlacement = placementSum/counter;
             placementAveragesSeries->append(lastDaysAgo, placementSum/counter);
 
-            qInfo() << "Current average: " << averagePlacement;
-
         }
         // Always on last
         if(i == 0){
             // Store placement average
             averagePlacement = (placementSum+place)/(counter+1);
             placementAveragesSeries->append(daysAgo, (placementSum+place)/(counter+1));
-            qInfo() << "Last average: " << averagePlacement;
         }
 
         // Placement average
@@ -255,7 +252,9 @@ void AnalyticsWindow::on_tabWidget_tabBarClicked(int index)
     // If Top Teams is chosen
     if(index == 5){
 
-        //
+        // Emit signal
+        emit topTeamsRequested();
+
     }
 
 }
@@ -266,6 +265,5 @@ void AnalyticsWindow::on_tabWidget_tabBarDoubleClicked(int index)
     if(index == 2){
         QScrollBar *vScrollBar = scrollArea->verticalScrollBar();
         vScrollBar->triggerAction(QScrollBar::SliderToMinimum);
-        qInfo() << "Scrolled! Index: " << index;
     }
 }
