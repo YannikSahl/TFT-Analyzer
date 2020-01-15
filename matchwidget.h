@@ -7,6 +7,7 @@
 #include "trait.h"
 #include "champion.h"
 
+/// /// Widget that displays information about a certain Match, to be used in 'Match History'
 class MatchWidget : public QWidget
 {
     Q_OBJECT
@@ -41,24 +42,19 @@ private:
     QLabel *labelChamp;
     QLabel *labelChamp_rank;
 
-    // Methods
+    /// Sets up Basic Structure of the Widget
     void initialize();
+
+    /// Customizes Widget: Fills in data
     void customize(QString placement, QString level, QString round, QString daysAgo, QList<Trait> traits, QList<Champion> champions);
 
 
 public:
+
     explicit MatchWidget(QString placement, QString level, QString round, QString daysAgo, QList<Trait> traits, QList<Champion> champions, QWidget *parent = nullptr);
 
 
-
-
-
-
 signals:
-
-
-
-
 
 
 

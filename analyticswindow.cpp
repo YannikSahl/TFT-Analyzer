@@ -7,7 +7,7 @@
 #include <QScrollBar>
 #include "placementchart.h"
 
-// Constructor
+/// Constructor
 AnalyticsWindow::AnalyticsWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AnalyticsWindow)
@@ -34,14 +34,14 @@ AnalyticsWindow::AnalyticsWindow(QWidget *parent) :
 
 }
 
-// Destructor
+/// Destructor
 AnalyticsWindow::~AnalyticsWindow()
 {
     delete ui;
 }
 
 
-// Slots Overview Tab
+/// Slots Overview Tab
 void AnalyticsWindow::setLabel_ProfileIcon(QPixmap profileIcon){
     ui->label_overview_picture_profileIcon->setPixmap(profileIcon);
     ui->label_overview_picture_profileIcon->setScaledContents(true);
@@ -79,7 +79,7 @@ void AnalyticsWindow::setLabel_AveragePlacements(QString averagePlacement){
 
 
 
-// Slots Statistics Tab: Ranked Box
+/// Slots Statistics Tab: Ranked Box
 void AnalyticsWindow::setLabel_Games(QString games){
     ui->label_gamesPlayed_data->setText(games);
 }
@@ -114,7 +114,7 @@ void AnalyticsWindow::setLabel_activityStatus(QString active){
 }
 
 
-// Slots Overview Tab: Team Comp Box
+/// Slots Overview Tab: Team Comp Box
 void AnalyticsWindow::setLabel_FavoriteComp(QString comp){
     ui->label_favorite_data->setText(comp);
 }
@@ -124,7 +124,7 @@ void AnalyticsWindow::setLabel_FavoriteComp2(QString comp){
 }
 
 
-// Slots Placement History Tab: Initialize Tab
+/// Slots Placement History Tab: Initialize Tab
 void AnalyticsWindow::fillPlacementHistoryTab(QVector< QVector<int> > placements, int maxDaysAgo, int minDaysAgo){
 
     // Add layout to tab
@@ -183,7 +183,7 @@ void AnalyticsWindow::fillPlacementHistoryTab(QVector< QVector<int> > placements
 }
 
 
-// Slots Match History Tab: Initialize Tab
+/// Slots Match History Tab: Initialize Tab
 void AnalyticsWindow::initializeMatchHistoryTab(){
 
     // Add layout to tab
@@ -215,7 +215,7 @@ void AnalyticsWindow::initializeMatchHistoryTab(){
 
 }
 
-// Slots Match History Tab: Add Match
+/// Slots Match History Tab: Add Match
 void AnalyticsWindow::addMatch(QString placement, QString level, QString round, QString daysAgo, QList<Trait> traits, QList<Champion> champions){
 
     // Add match
@@ -235,7 +235,7 @@ void AnalyticsWindow::addMatch(QString placement, QString level, QString round, 
 
 }
 
-// Slots Comp Tab: Add Team Comp
+/// Slots Comp Tab: Add Team Comp
 void AnalyticsWindow::addComp(int place, QString teamComp, double playRate, double winRate, int choiceTab){
 
 
@@ -261,7 +261,7 @@ void AnalyticsWindow::addComp(int place, QString teamComp, double playRate, doub
 
 }
 
-// Slot TopTeams: Set status
+/// Slot TopTeams: Set status
 void AnalyticsWindow::setTopTeamsStatus(QString status){
 
     ui->label_statusTopTeams->show();
@@ -270,7 +270,7 @@ void AnalyticsWindow::setTopTeamsStatus(QString status){
 }
 
 
-// Scroll to top on click
+/// Emit signal to fill Top Teams Tab when clicked
 void AnalyticsWindow::on_tabWidget_tabBarClicked(int index)
 {
 
@@ -287,6 +287,7 @@ void AnalyticsWindow::on_tabWidget_tabBarClicked(int index)
 
 }
 
+/// Scroll to Top on Double-Click
 void AnalyticsWindow::on_tabWidget_tabBarDoubleClicked(int index)
 {
     // If Match History is double clicked

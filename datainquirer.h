@@ -12,19 +12,26 @@ private:
 
 public:
 
-    // Attribute
+    // Member Variables
     QJsonObject jsonData;
     QByteArray byteResponse;
 
     // Constructor
     DataInquirer(QUrl url_);
 
-    // Method
+    /// Basic Query to RIOT's API
     void queryRiotAPI();
+
+    /// Helper method that unifies data returned by RIOTs inconsistent API
     QByteArray manipulateMatchIds(QByteArray response);
+
+
+    /// Helper method that unifies data returned by RIOTs inconsistent API
     QByteArray manipulateRankedData(QByteArray response);
 
 public slots:
+
+    /// Slot that is invoked whenever an API call is finished
     void handleResult(QNetworkReply* reply);
 
 };

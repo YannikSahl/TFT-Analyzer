@@ -1,5 +1,6 @@
 #include "trait.h"
 
+// Constructor
 Trait::Trait(QString traitName_, int numUnits_, int tierCurrent_, int tierTotal_)
 {
 
