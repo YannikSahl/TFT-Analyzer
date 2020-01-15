@@ -271,7 +271,7 @@ void RequestHandler::handleTopRequest(){
         QString puuid = entrySummonerInfo["puuid"].toString();
 
         // Use puuid to query matches
-        int matchCounter = 8;
+        int matchCounter = 5;
         QJsonObject matchIDsData = queryMatchIDs(puuid, matchCounter);
         QJsonArray matchIds = matchIDsData["matches"].toArray();
 
