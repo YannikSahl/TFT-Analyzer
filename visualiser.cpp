@@ -72,7 +72,7 @@ void Visualiser::fillOverview(){
     QString rank = rankedData["rank"].toString();
     analyticsWindow->setLabel_Tier(tier + " " + rank);
 
-    // 2.Rank icon
+    // 2. Rank icon
     if(tier == "IRON"){analyticsWindow->setLabel_RankedIcon(QPixmap(":/include/ranked-emblems/Emblem_Iron.png"));}
     if(tier == "BRONZE"){analyticsWindow->setLabel_RankedIcon(QPixmap(":/include/ranked-emblems/Emblem_Bronze.png"));}
     if(tier == "SILVER"){analyticsWindow->setLabel_RankedIcon(QPixmap(":/include/ranked-emblems/Emblem_Silver.png"));}
@@ -83,19 +83,17 @@ void Visualiser::fillOverview(){
     if(tier == "GRANDMASTER"){analyticsWindow->setLabel_RankedIcon(QPixmap(":/include/ranked-emblems/Emblem_Grandmaster.png"));}
     if(tier == "CHALLENGER"){analyticsWindow->setLabel_RankedIcon(QPixmap(":/include/ranked-emblems/Emblem_Challenger.png"));}
 
-    // League Points
+    // 2. League Points
     QString leaguePoints = QString::number(rankedData["leaguePoints"].toInt());
     analyticsWindow->setLabel_LP(leaguePoints);
 
-    // Win Rate
+    // 2. Win Rate
     int wins = rankedData["wins"].toInt();
     int losses = rankedData["losses"].toInt();
     int gamesPlayed = wins + losses;
     double winrate = round(1000*(double)wins / gamesPlayed)/10;
     QString winrateString = QString::number(winrate);
     analyticsWindow->setLabel_WinRateDesc(winrateString);
-
-    // Average Place: Handled by fillMatchHistory
 
 }
 
@@ -124,17 +122,13 @@ void Visualiser::fillStatistics(){
     bool activity = rankedData["inactive"].toBool();
     analyticsWindow->setLabel_activityStatus(!activity ? "Active" : "Inactive");
 
-    // Team Comp Box
-
-
-
 }
 
 // Fills Match History Tab
 void Visualiser::fillMatchHistory(){
 
     // Calculate average placement
-    double placementAverage = 0, placementAverageMirror = 0;
+    double placementAverage = 0;
     int minDaysAgo = 80000, maxDaysAgo = 0;
 
     // Prepare statistics recent placement string

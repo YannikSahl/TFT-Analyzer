@@ -252,9 +252,10 @@ void AnalyticsWindow::addComp(int place, QString teamComp, double playRate, doub
 void AnalyticsWindow::on_tabWidget_tabBarClicked(int index)
 {
 
-    // If Top 10 is chosen
+    // If Top Teams is chosen
     if(index == 5){
 
+        //
     }
 
 }

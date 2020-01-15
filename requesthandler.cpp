@@ -81,6 +81,59 @@ int RequestHandler::handleRequest(){
 
 }
 
+
+
+// Orchestrate Process Procedure: Top Teams
+int RequestHandler::handleTopRequest(){
+
+    // Get challenger puuids
+    QJsonObject challengerInfo = queryChallengersInfo();
+
+    // Get "entries"
+    QJsonArray entriesArray = challengerInfo["entries"].toArray();
+
+    // Get top 8
+    for(int i = 0; i < 8; i++){
+
+        // Get entry
+        QJsonObject entry = entriesArray[i].toObject();
+
+        // Get name
+        QString name = entry["summonerName"].toString();
+
+        // Use name to get summmoner info (to get puuid)
+        QJsonObject entrySummonerInfo = querySummonerInfo(name);
+
+        // Extract puuid
+        QString puuid = entrySummonerInfo["puuid"].toString();
+
+        // Use puuid to query matches
+        QJsonObject matchIDsData = queryMatchIDs(puuid, 10);
+
+    }
+
+}
+
+
+// Gets currently best players
+QJsonObject RequestHandler::queryChallengersInfo(){
+
+    QList<QString> challengerPuuids;
+
+    // Build URL
+    QString regionFormat = determineRegion(0);
+    queryString = "https://euw1.api.riotgames.com/tft/league/v1/grandmaster?api_key=" + apiKey;
+    queryUrl.setUrl(queryString);
+
+    // Inquire Data
+    dataInq = new DataInquirer(queryUrl);
+    dataInq->queryRiotAPI();
+
+    // Get Response Data
+    return dataInq->jsonData;
+
+}
+
 // Gets Information about the Summoner Name
 QJsonObject RequestHandler::querySummonerInfo(QString summonerName){
 
@@ -123,14 +176,14 @@ QJsonObject RequestHandler::queryRankedInfo(QString summonerId){
 }
 
 // Gets all the Match IDs belonging to a specific PUUID
-QJsonObject RequestHandler::queryMatchIDs(QString puuId){
+QJsonObject RequestHandler::queryMatchIDs(QString puuId, int maches = 100){
 
     // Status
     emit analysisStatusChanged("Querying Match Data");
 
     // Build URL
     QString regionFormat = determineRegion(1);
-    queryString = "https://" + regionFormat + ".api.riotgames.com/tft/match/v1/matches/by-puuid/" + puuId + "/ids?count=1000&api_key=" + apiKey;
+    queryString = "https://" + regionFormat + ".api.riotgames.com/tft/match/v1/matches/by-puuid/" + puuId + "/ids?count=" + matches + "&api_key=" + apiKey;
     queryUrl.setUrl(queryString);
 
     // Inquire Data

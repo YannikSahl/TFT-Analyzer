@@ -32,13 +32,18 @@ public:
 
     RequestHandler(AnalyticsWindow *analyticsWindow, QString apiKey_, QString summonerName_, QString region_, int matchCount_);
     int handleRequest();
+    int handleTopRequest();
 
     QString determineRegion(bool regionFormat);
 
+    // Functions to get Data for given Summoner
     QJsonObject querySummonerInfo(QString summonerName);
     QJsonObject queryRankedInfo(QString summonerId);
-    QJsonObject queryMatchIDs(QString puuid);
+    QJsonObject queryMatchIDs(QString puuid, int matches);
     QJsonObject queryMatchInfo(QString matchId);
+
+    // Functions to get Data for best Players
+    QJsonObject queryChallengersInfo();
 
 signals:
     void analysisStatusChanged(QString newStatus);

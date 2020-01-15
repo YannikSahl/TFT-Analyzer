@@ -167,7 +167,6 @@ void MainWindow::hideLoadingSymbol(QLabel *lbl){
 // Evoke settings window
 void MainWindow::on_settingsButton_clicked()
 {
-
     settingsDialog->show();
 }
 
