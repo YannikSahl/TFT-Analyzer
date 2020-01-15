@@ -29,6 +29,9 @@ AnalyticsWindow::AnalyticsWindow(QWidget *parent) :
     // Initialize Match History Tab
     initializeMatchHistoryTab();
 
+    // Hide frame in topTeams until data is requested
+    ui->frame_headerTopTeams->hide();
+
 }
 
 // Destructor
@@ -233,14 +236,36 @@ void AnalyticsWindow::addMatch(QString placement, QString level, QString round, 
 }
 
 // Slots Comp Tab: Add Team Comp
-void AnalyticsWindow::addComp(int place, QString teamComp, double playRate, double winRate){
+void AnalyticsWindow::addComp(int place, QString teamComp, double playRate, double winRate, int choiceTab){
 
 
     // Create object
     CompWidget *cWidget = new CompWidget(place, teamComp, playRate, winRate, this);
 
-    // Add to layout
-    ui->tab_teamComps->layout()->addWidget(cWidget);
+    if(choiceTab == 0){
+
+        // Add to your teams' layout
+        ui->tab_teamComps->layout()->addWidget(cWidget);
+
+    } else if(choiceTab == 1){
+
+        // Restore tab
+        ui->label_statusTopTeams->hide();
+        ui->frame_headerTopTeams->show();
+
+        // Add to top teams' layout
+        ui->tab_topComps->layout()->addWidget(cWidget);
+
+    }
+
+
+}
+
+// Slot TopTeams: Set status
+void AnalyticsWindow::setTopTeamsStatus(QString status){
+
+    ui->label_statusTopTeams->show();
+    ui->label_statusTopTeams->setText(status);
 
 }
 
@@ -250,9 +275,12 @@ void AnalyticsWindow::on_tabWidget_tabBarClicked(int index)
 {
 
     // If Top Teams is chosen
-    if(index == 5){
+    if(index == 5 && (ui->tab_topComps->children().size() < 5 && (ui->label_statusTopTeams->text() == ""))){
 
-        // Emit signal
+        // Show tab
+        ui->tabWidget->setCurrentIndex(5);
+
+        // Emit signal to start topTeams request
         emit topTeamsRequested();
 
     }

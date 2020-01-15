@@ -17,7 +17,7 @@ DataInquirer::DataInquirer(QUrl url_)
 {
     url = url_;
 
-    qInfo().noquote() << "Created DataInquirer object with url:'" + url.toString();
+    qInfo().noquote() << "Created DataInquirer:' " + url.toString();
 }
 
 

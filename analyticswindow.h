@@ -61,16 +61,10 @@ public slots:
     void fillPlacementHistoryTab(QVector< QVector<int> > placements, int maxDaysAgo, int minDaysAgo);
 
     // Team Comp Tab
-    void addComp(int place, QString teamComp, double playRate, double winRate);
+    void addComp(int place, QString teamComp, double playRate, double winRate, int choiceTab);
 
-
-private slots:
-
-    // Tab Bar: Single click
-    void on_tabWidget_tabBarClicked(int index);
-
-    // Tab Bar: Double Click
-    void on_tabWidget_tabBarDoubleClicked(int index);
+    // TopTeams Tab Status
+    void setTopTeamsStatus(QString status);
 
 private:
     Ui::AnalyticsWindow *ui;
@@ -86,6 +80,15 @@ private:
 
     // Placement History Elements
     QVBoxLayout *tabVLayout2;
+
+private slots:
+
+    // Tab Bar: Single click
+    void on_tabWidget_tabBarClicked(int index);
+
+    // Tab Bar: Double Click
+    void on_tabWidget_tabBarDoubleClicked(int index);
+
 
 signals:
     void topTeamsRequested();

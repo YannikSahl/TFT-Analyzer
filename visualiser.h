@@ -44,7 +44,7 @@ public:
     void fillStatistics();
     void fillMatchHistory();
     void fillLPHistory();
-    void fillTeamComps();
+    void fillTeamComps(QList< TraitData > traitsInfo, int choiceTab);
     void fillTopTeams();
 
     QList<Trait> help_findTraitInfo(QJsonObject participantData);

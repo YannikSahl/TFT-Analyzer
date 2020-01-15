@@ -17,11 +17,13 @@ RequestHandler::RequestHandler(AnalyticsWindow *analyticsWindow_, QString apiKey
     region = region_;
     matchCount = matchCount_;
 
-    // Connect analyticswindow and requesthandler, so that when topTeams are requested, requesthandler starts new request
+    // Connect analyticswindow and requesthandler: analyticsWindow sends signal request for topTeams, requesthandler starts new request
     connect(analyticsWindow, SIGNAL(topTeamsRequested()), this, SLOT(handleTopRequest()));
 
+    // Connect requesthandler and analyticswindow: requesthandler sends signal status update, analyticswindow shows status
+    connect(this, SIGNAL(topTeamRequestStatusChanged(QString)), analyticsWindow, SLOT(setTopTeamsStatus(QString)));
+
     // Status
-    emit analysisStatusChanged("test");
     qInfo().noquote() << "Created RequestHandler object with apiKey:'" + apiKey_ + "' and summonerName:'" + summonerName;
 }
 
@@ -43,7 +45,7 @@ int RequestHandler::handleRequest(){
 
     // Get Match IDs
     QString puuid = summonerData["puuid"].toString();
-    QJsonObject matchIDsData = queryMatchIDs(puuid, 10);
+    QJsonObject matchIDsData = queryMatchIDs(puuid, matchCount);
 
     // Get Match Info
     if(matchIDsData["matches"].isNull()){
@@ -73,7 +75,7 @@ int RequestHandler::handleRequest(){
     }
 
     // Wait for all responses
-    while(matchData.size() != maxMatches){}
+    //while(matchData.size() != maxMatches){}
 
     // Update status
     emit analysisStatusChanged("Processing Matches");
@@ -81,6 +83,8 @@ int RequestHandler::handleRequest(){
     // Forward Data for Visualisation
     Visualiser *visual = new Visualiser(analyticsWindow, summonerData, rankedData, matchIDsData, matchData);
     visual->fillGUI();
+
+    // Return value
     return 1;
 
 }
@@ -90,6 +94,9 @@ int RequestHandler::handleRequest(){
 QJsonObject RequestHandler::queryChallengersInfo(){
 
     QList<QString> challengerPuuids;
+
+    // Status
+    emit analysisStatusChanged("Querying Challenger Names");
 
     // Build URL
     QString regionFormat = determineRegion(0);
@@ -167,13 +174,12 @@ QJsonObject RequestHandler::queryMatchIDs(QString puuId, int matches = 100){
 }
 
 // Gets Info for a specific Match
-QJsonObject RequestHandler::queryMatchInfo(QString matchId){
+void RequestHandler::queryMatchInfo(QString matchId){
 
     // Build URL
     QString regionFormat = determineRegion(1);
     queryString = "https://" + regionFormat + ".api.riotgames.com/tft/match/v1/matches/" + matchId + "?api_key=" + apiKey;
     queryUrl.setUrl(queryString);
-
 
     // Inquire Data
     dataInq = new DataInquirer(queryUrl);
@@ -181,8 +187,20 @@ QJsonObject RequestHandler::queryMatchInfo(QString matchId){
 
     // Get Response Data
     QJsonObject singleMatch = dataInq->jsonData;
-    matchData.append(singleMatch);
-    return dataInq->jsonData;
+
+    // Inspect on completeness
+    QJsonObject infoData = singleMatch["info"].toObject();
+    QString gamelength = QString::number(infoData["game_length"].toDouble());
+
+    // Data complete: gameLength = 0?
+    if(gamelength == "0"){
+        qInfo() << "Error: Match '" << matchId << "' lacks data, has gamelength" << gamelength << " -> Skipped";
+    } else{
+
+        // Append to other matches
+        matchData.append(singleMatch);
+
+    }
 
 }
 
@@ -225,6 +243,7 @@ QString RequestHandler::determineRegion(bool regionFormat){
 // Slots: Start request for TopTeams
 void RequestHandler::handleTopRequest(){
 
+    matchData.erase(matchData.begin(), matchData.end());
 
     // Get challenger puuids
     QJsonObject challengerInfo = queryChallengersInfo();
@@ -232,14 +251,18 @@ void RequestHandler::handleTopRequest(){
     // Get "entries"
     QJsonArray entriesArray = challengerInfo["entries"].toArray();
 
-    // Get top 8
-    for(int i = 0; i < 8; i++){
+    // Get top 10
+    int challengerCount = 10;
+    for(int i = 0; i < challengerCount; i++){
 
         // Get entry
         QJsonObject entry = entriesArray[i].toObject();
 
         // Get name
         QString name = entry["summonerName"].toString();
+
+        // Status
+        emit topTeamRequestStatusChanged("\t\tQuerying Data for Challenger " + QString::number(i+1) + " of " + QString::number(challengerCount) + ": Summoner Data");
 
         // Use name to get summmoner info (to get puuid)
         QJsonObject entrySummonerInfo = querySummonerInfo(name);
@@ -248,8 +271,33 @@ void RequestHandler::handleTopRequest(){
         QString puuid = entrySummonerInfo["puuid"].toString();
 
         // Use puuid to query matches
-        QJsonObject matchIDsData = queryMatchIDs(puuid, 10);
+        int matchCounter = 8;
+        QJsonObject matchIDsData = queryMatchIDs(puuid, matchCounter);
+        QJsonArray matchIds = matchIDsData["matches"].toArray();
 
+        // Get most recent matches
+        for(int j = 0; j < matchIds.size(); j++){
+
+            // Status
+            emit topTeamRequestStatusChanged("\t\tQuerying Data for Challenger " + QString::number(i+1) + " of " + QString::number(challengerCount) + ": Match " + QString::number(j+1) + " of " + QString::number(matchCounter));
+
+            // Get single match ID
+            QString matchIdString = matchIds[j].toString();
+
+            // Add match to
+            queryMatchInfo(matchIdString);
+
+        }
     }
+
+    // Update status
+    emit topTeamRequestStatusChanged("\t\tProcessing Matches");
+
+    // Forward Data for Visualisation
+    Visualiser *visualTop = new Visualiser(analyticsWindow, *new QJsonObject(), *new QJsonObject(), *new QJsonObject(), matchData);
+    visualTop->fillTopTeams();
+
+    // Clear status label
+    emit analysisStatusChanged("");
 
 }

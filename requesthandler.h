@@ -27,10 +27,6 @@ private:
 
     QVector<QJsonObject> matchData;
 
-private slots:
-    void handleTopRequest();
-
-
 public:
 
     RequestHandler(AnalyticsWindow *analyticsWindow, QString apiKey_, QString summonerName_, QString region_, int matchCount_);
@@ -42,13 +38,19 @@ public:
     QJsonObject querySummonerInfo(QString summonerName);
     QJsonObject queryRankedInfo(QString summonerId);
     QJsonObject queryMatchIDs(QString puuid, int matches);
-    QJsonObject queryMatchInfo(QString matchId);
+    void queryMatchInfo(QString matchId);
 
-    // Functions to get Data for best Players
+    // Function to get Data for best Players
     QJsonObject queryChallengersInfo();
+
+
+public slots:
+    void handleTopRequest();
+
 
 signals:
     void analysisStatusChanged(QString newStatus);
+    void topTeamRequestStatusChanged(QString newStatus);
 
 
 };

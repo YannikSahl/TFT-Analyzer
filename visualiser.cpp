@@ -35,12 +35,6 @@ void Visualiser::fillGUI(){
     // Fill Match History Tab
     fillMatchHistory();
 
-    // Fills Team Comps Tab
-    fillTeamComps();
-
-    // Fills Top 10 Tab
-    fillTopTeams();
-
 }
 
 
@@ -207,6 +201,9 @@ void Visualiser::fillMatchHistory(){
         }
     }
 
+    // Team Comps Tab: Display results
+    fillTeamComps(allTraits, 0);
+
     // Overview Tab: Display average
     placementAverage = roundf(100*(placementAverage / (double) matchData.length()))/100;
     analyticsWindow->setLabel_AveragePlacements(QString::number(placementAverage));
@@ -222,14 +219,14 @@ void Visualiser::fillMatchHistory(){
 
 
 
-// Fills Team Comps Tab
-void Visualiser::fillTeamComps(){
+// Fills in team comps in: Your Teams and Top Teams Tab
+void Visualiser::fillTeamComps(QList< TraitData > allTraitData, int choiceTab = 0){
 
     // Prepare hash
     QHash<QString, TraitInfo> compCounts;
 
     // Find most common team comps
-    for(TraitData traitData : allTraits){
+    for(TraitData traitData : allTraitData){
 
         // Extract info
         QList<Trait> traits = traitData.traits;
@@ -294,18 +291,18 @@ void Visualiser::fillTeamComps(){
         }
 
         // Show comp and remove
-        analyticsWindow->addComp(i+1, compName, (double)compPlays/allPlays, (double)compRating/compPlays);
+        analyticsWindow->addComp(i+1, compName, (double)compPlays/allPlays, (double)compRating/compPlays, choiceTab);
         compCounts.remove(compName);
 
-        // Fill overview tab
-        if(i == 0) analyticsWindow->setLabel_FavoriteComp(compName);
-        if(i == 1) analyticsWindow->setLabel_FavoriteComp2(compName);
+        if(choiceTab == 0){
+            // Fill overview tab
+            if(i == 0) analyticsWindow->setLabel_FavoriteComp(compName);
+            if(i == 1) analyticsWindow->setLabel_FavoriteComp2(compName);
+        }
 
         // Reset iterator
         iter.toFront();
     }
-
-
 }
 
 
@@ -313,13 +310,39 @@ void Visualiser::fillTeamComps(){
 // Fills Top 10 Tab
 void Visualiser::fillTopTeams(){
 
-    // Get top 8 summoner
+    // Iterate over Matches
+    for(int i = 0; i < matchData.size(); i++){
 
+        QJsonObject match = matchData[i];
 
-    // Get 10 matches per summoner
+        // Get "participants" from "info"
+        QJsonObject infoData = match["info"].toObject();
+        QJsonArray participantsArray = infoData["participants"].toArray();
 
+        // Iterate over participantsArray
+        for(int j = 0; j < participantsArray.size(); j++){
 
-    //
+            qInfo() << "Analysing:" << (1+j+(i)*participantsArray.size());
+
+            // Get single participant info
+            QJsonObject participantData = participantsArray[j].toObject();
+
+            // Get meta data
+            int placement = participantData["placement"].toInt();
+
+            // Get traits with num units, sort and append to list
+            QList<Trait> traits = help_findTraitInfo(participantData);
+            qSort(traits.begin(), traits.end());
+
+            // Store traits + placement
+            struct TraitData singletrait{traits, placement};
+            allTraits.append(singletrait);
+
+        }
+    }
+
+    // Show results
+    fillTeamComps(allTraits, 1);
 
 }
 

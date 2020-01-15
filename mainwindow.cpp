@@ -66,6 +66,7 @@ void MainWindow::on_searchButton_released()
 
         // Show Analytics Window
         analyticsWindow->show();
+        requestHandler->handleTopRequest();
 
     }
     // Else Show Error: Summoner not found
