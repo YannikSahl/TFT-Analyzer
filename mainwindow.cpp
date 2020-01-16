@@ -26,8 +26,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // Setup settings
     settingsDialog = new SettingsDialog(this);
 
-    // Temp
-    ui->summonerNameLine->setText("Alvarny");
+    // Set region
     ui->regionChooserBox->setCurrentText("EUW");
 
 }
