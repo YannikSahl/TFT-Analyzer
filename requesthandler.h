@@ -6,7 +6,7 @@
 #include "datainquirer.h"
 #include "analyticswindow.h"
 
-
+/// Orcestrates what is when and how queried
 class RequestHandler : public QObject
 {
     Q_OBJECT
@@ -14,17 +14,21 @@ class RequestHandler : public QObject
 
 private:
 
+    // Object of analyticsWindow to pass along to Visualiser
     AnalyticsWindow *analyticsWindow;
 
+    // Information received from the MainWindow
     QString apiKey;
     QString summonerName;
     QString region;
     int matchCount;
 
+    // Member variables used for internal logic
     QString queryString;
     QUrl queryUrl;
     DataInquirer *dataInq;
 
+    // QVector that stores data about queried Matches for further Analysis
     QVector<QJsonObject> matchData;
 
 public:

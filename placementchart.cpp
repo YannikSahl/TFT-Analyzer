@@ -68,8 +68,6 @@ PlacementChart::PlacementChart(QScatterSeries *placements, QLineSeries *averageP
     axisY->append("4th and 5th  ", 5);
     axisY->append("1st to 4th  ", 9);
 
-
-
     // Append axis
     chart->addAxis(axisX, Qt::AlignBottom);
     chart->addAxis(axisY, Qt::AlignLeft);

@@ -38,8 +38,6 @@ void Visualiser::fillGUI(){
 }
 
 
-
-
 // Fills Overview Tab
 void Visualiser::fillOverview(){
 
@@ -322,7 +320,7 @@ void Visualiser::fillTopTeams(){
         // Iterate over participantsArray
         for(int j = 0; j < participantsArray.size(); j++){
 
-            qInfo() << "Analysing:" << (1+j+(i)*participantsArray.size());
+            //qInfo() << "Analysing:" << (1+j+(i)*participantsArray.size());
 
             // Get single participant info
             QJsonObject participantData = participantsArray[j].toObject();
@@ -352,7 +350,7 @@ void Visualiser::fillTopTeams(){
 
 
 
-// Helper methods
+// Helper method to extract Trait Data
 QList<Trait> Visualiser::help_findTraitInfo(QJsonObject participantData){
 
     // Prepare return variable
@@ -386,7 +384,7 @@ QList<Trait> Visualiser::help_findTraitInfo(QJsonObject participantData){
 }
 
 
-
+// Helper method to extract Champion Data
 QList<Champion> Visualiser::help_findChampionInfo(QJsonObject participantData){
 
     // Prepare return variable

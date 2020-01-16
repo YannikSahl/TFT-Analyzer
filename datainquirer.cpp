@@ -46,6 +46,7 @@ void DataInquirer::queryRiotAPI(){
 
 }
 
+
 // Do something with query reply
 void DataInquirer::handleResult(QNetworkReply* reply){
 

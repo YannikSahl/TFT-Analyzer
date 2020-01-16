@@ -13,6 +13,7 @@ namespace Ui {
 class AnalyticsWindow;
 }
 
+/// QDialog that controls interface to the user
 class AnalyticsWindow : public QDialog
 {
     Q_OBJECT
@@ -25,10 +26,9 @@ public:
 
 public slots:
 
-    // Overview
+    // Overview Tab
     void setLabel_ProfileIcon(QPixmap profileIcon);
     void setLabel_RankedIcon(QPixmap profileIcon);
-
     void setLabel_Name(QString name);
     void setLabel_Region(QString region);
     void setLabel_Tier(QString tier);
@@ -71,10 +71,8 @@ private:
 
     // Match History Elements
     QVBoxLayout *tabVLayout;
-
     QScrollArea *scrollArea;
     QVBoxLayout *scrollVLayout;
-
     QWidget *scrollContents;
     QVBoxLayout *layout;
 
@@ -91,6 +89,7 @@ private slots:
 
 
 signals:
+    // Emit signal to fill TopTeams Tab
     void topTeamsRequested();
 
 };

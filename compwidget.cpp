@@ -1,5 +1,6 @@
 #include "compwidget.h"
 
+// Constructor
 CompWidget::CompWidget(int place, QString teamComp, double playRate, double winRate, QWidget *parent) : QWidget(parent)
 {
 
@@ -8,7 +9,7 @@ CompWidget::CompWidget(int place, QString teamComp, double playRate, double winR
 
 }
 
-
+/// Sets up Basic Structure of the Widget
 void CompWidget::initialize(){
 
     // Set size
@@ -42,7 +43,7 @@ void CompWidget::initialize(){
 }
 
 
-// Customizes Widget with given data
+/// Customizes Widget: Fills in data
 void CompWidget::customize(int place, QString teamComp, double playRate, double winRate){
 
     label_ranking->setText(QString::number(place) + ".");

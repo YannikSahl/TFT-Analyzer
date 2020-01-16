@@ -2,6 +2,7 @@
 #include "ui_settingsdialog.h"
 #include <QString>
 
+// Constructor
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SettingsDialog)
@@ -11,10 +12,12 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     apiKey = ui->apiKeyLine->text();
 }
 
+// Destructor
 SettingsDialog::~SettingsDialog()
 {
     delete ui;
 }
+
 
 // Store any changes that were made
 void SettingsDialog::on_buttonBox_accepted()

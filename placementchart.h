@@ -1,6 +1,4 @@
-#ifndef PLACEMENTCHART_H
-#define PLACEMENTCHART_H
-
+#pragma once
 #include <QWidget>
 #include <QtCharts/QChartView>
 #include <QtCharts/QScatterSeries>
@@ -9,6 +7,8 @@
 
 using namespace QtCharts;
 
+
+/// Chart that shows the recent Ranking
 class PlacementChart : public QWidget
 {
     Q_OBJECT
@@ -16,18 +16,11 @@ class PlacementChart : public QWidget
 
 
 public:
+
+    // Constructor
     explicit PlacementChart(QScatterSeries *series, QLineSeries *averagePlacements, int minDaysAgo, int maxDaysAgo, QWidget *parent = nullptr);
 
+    // Chart View shown to the user
     QChartView *chartView;
 
-
-
-
-
-signals:
-
-
-
 };
-
-#endif // PLACEMENTCHART_H
