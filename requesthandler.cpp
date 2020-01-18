@@ -252,7 +252,7 @@ void RequestHandler::handleTopRequest(){
     QJsonArray entriesArray = challengerInfo["entries"].toArray();
 
     // Get top 10
-    int challengerCount = 2;
+    int challengerCount = 10;
     for(int i = 0; i < challengerCount; i++){
 
         // Get entry

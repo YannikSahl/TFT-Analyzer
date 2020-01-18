@@ -1,13 +1,18 @@
 #pragma once
 #include <QString>
 
-/// Container class for API-Data
+/*!
+ * \brief The Champion class is a container class for API-Data.
+ */
 class Champion
 {
 
 public:
 
-    // Constructor
+    /// Constructor
+    /*!
+     * \brief Champion Constructor.
+     */
     Champion(QString championName, int championTier, int championCost);
 
     // Member variables
@@ -15,6 +20,8 @@ public:
     int championCost;
     int championTier;
 
-    /// Define < operator to sort qlist
+    /*!
+     * \brief operator < define < operator to sort QList.
+     */
     bool operator <(const Champion &championObj) const;
 };

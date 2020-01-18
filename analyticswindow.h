@@ -13,20 +13,29 @@ namespace Ui {
 class AnalyticsWindow;
 }
 
-/// QDialog that controls interface to the user
+/*!
+ * \brief The AnalyticsWindow class displays information to the user.
+ */
 class AnalyticsWindow : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit AnalyticsWindow(QWidget *parent = nullptr);
-    ~AnalyticsWindow();
 
+    /*!
+     * \brief AnalyticsWindow Constructor.
+     */
+    explicit AnalyticsWindow(QWidget *parent = nullptr);
+
+    /*!
+     * \brief ~AnalyticsWindow Destructor.
+     */
+    ~AnalyticsWindow();
 
 
 public slots:
 
-    // Overview Tab
+    // Overview Tab: Interface to set labels
     void setLabel_ProfileIcon(QPixmap profileIcon);
     void setLabel_RankedIcon(QPixmap profileIcon);
     void setLabel_Name(QString name);
@@ -36,8 +45,7 @@ public slots:
     void setLabel_WinRateDesc(QString winRate);
     void setLabel_AveragePlacements(QString averagePlacement);
 
-
-    // Statistics: Ranked Box
+    // Statistics: Ranked Box: Interface to set labels
     void setLabel_Games(QString games);
     void setLabel_Wins(QString wins);
     void setLabel_Losses(QString losses);
@@ -45,25 +53,40 @@ public slots:
     void setLabel_HotStreak(QString yesno);
     void setLabel_Placements(QString placements);
 
-    // Statistics: Summoner Box
+    // Statistics: Summoner Box: Interface to set labels
     void setLabel_summonerLevel(QString summonerLevel);
     void setLabel_activityStatus(QString active);
 
-    // Statistics: Team Comp Box
+    // Statistics: Team Comp Box: Interface to set labels
     void setLabel_FavoriteComp(QString comp);
     void setLabel_FavoriteComp2(QString comp);
 
-    // Match History Tab
+    /*!
+     * \brief initializeMatchHistoryTab initializes the Match History Tab by configuring the layout.
+     */
     void initializeMatchHistoryTab();
+
+
+    /*!
+     * \brief addMatch adds a MatchWidget that was constructed using the passed parameters.
+     */
     void addMatch(QString placement, QString level, QString round, QString daysAgo, QList<Trait> traits, QList<Champion> champions);
 
-    // Placement History Tab
+
+    /*!
+     * \brief fillPlacementHistoryTab uses the passed data to configure the graph shown in the "Rankings" Tab.
+     */
     void fillPlacementHistoryTab(QVector< QVector<int> > placements, int maxDaysAgo, int minDaysAgo);
 
-    // Team Comp Tab
+    /*!
+     * \brief addComp adds a CompWidget that was constructed using the passed parameters.
+     */
     void addComp(int place, QString teamComp, double playRate, double winRate, int choiceTab);
 
-    // TopTeams Tab Status
+
+    /*!
+     * \brief setTopTeamsStatus sets the Label on the "Ranking" Tab to inform the user about the current status.
+     */
     void setTopTeamsStatus(QString status);
 
 private:
@@ -81,15 +104,25 @@ private:
 
 private slots:
 
-    // Tab Bar: Single click
+    /*!
+     * \brief on_tabWidget_tabBarClicked is called whenever the Tab Bar is single-clicked.
+     * \param index is the tab being clicked.
+     */
     void on_tabWidget_tabBarClicked(int index);
 
     // Tab Bar: Double Click
+    /*!
+     * \brief on_tabWidget_tabBarDoubleClicked is called whenever the Tab Bar is double-clicked.
+     * \param index is the tab being clicked.
+     */
     void on_tabWidget_tabBarDoubleClicked(int index);
 
 
 signals:
-    // Emit signal to fill TopTeams Tab
+
+    /*!
+     * \brief topTeamsRequested is a signal emitted to fill the "Top Teams" Tab.
+     */
     void topTeamsRequested();
 
 };

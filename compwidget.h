@@ -3,7 +3,9 @@
 #include <QHBoxLayout>
 #include <QLabel>
 
-/// Widget that displays information about a certain Team, to be used in 'Your Team' and 'Top Team' Tab
+/*!
+ * \brief The CompWidget class defines a widget that displays information about a certain Team, to be used in 'Your Team' and 'Top Team' Tab
+ */
 class CompWidget : public QWidget
 {
     Q_OBJECT
@@ -11,7 +13,9 @@ class CompWidget : public QWidget
 
 private:
 
-    // Layout of the widget
+    /*!
+     * \brief compWidget_layout is the Widget's layout.
+     */
     QHBoxLayout *compWidget_layout;
 
     // Different labels to show information
@@ -23,13 +27,19 @@ private:
 
 public:
 
-    // Constructor
+    /*!
+     * \brief CompWidget Constructor.
+     */
     explicit CompWidget(int place, QString teamComp, double playRate, double winRate, QWidget *parent = nullptr);
 
-    /// Sets up Basic Structure of the Widget
+    /*!
+     * \brief initialize sets up Basic Structure of the Widget.
+     */
     void initialize();
 
-    /// Customizes Widget: Fills in data
+    /*!
+     * \brief customize customizes Widget: Fills in data.
+     */
     void customize(int place, QString teamComp, double playRate, double winRate);
 
 
