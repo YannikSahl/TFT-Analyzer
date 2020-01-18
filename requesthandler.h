@@ -51,11 +51,9 @@ public:
 public slots:
     void handleTopRequest();
 
-
 signals:
     void analysisStatusChanged(QString newStatus);
     void topTeamRequestStatusChanged(QString newStatus);
-
 
 };
 

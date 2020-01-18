@@ -13,6 +13,10 @@ using namespace std;
 
 
 // Constructor
+/*!
+ * \brief test descrip
+ * \param url_ something
+ */
 DataInquirer::DataInquirer(QUrl url_)
 {
     url = url_;
