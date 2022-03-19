@@ -5,7 +5,7 @@
   Teamfight Insight
 </h1>
 <p align="center">
-  An application to boost your abilities in the popular <i>auto battler<i>game 'Teamfight Tactics'
+  An application to boost your abilities in the popular <i>auto battler</i> game 'Teamfight Tactics'
 </p>
 
 # Overview
